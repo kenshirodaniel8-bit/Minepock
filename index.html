@@ -937,7 +937,7 @@ const DIFFICULTIES = [
 const NPCS = [
   { id: 'bram', name: 'Pak Bram', role: 'Kepala Desa • pria dewasa, tenang', look: { skin: '#c99a6e', hair: '#8a8a8a', shirt: '#6b4a2a', pants: '#3b2a1a', beard: '#a0a0a0', h: 1.08, robe: true },
     voice: { pitch: 92, range: 2.5, speed: 3.6, wave: 'sawtooth', formant: .86, breath: .08, vib: [4.5, .006], style: 'calm' },
-    lines: ['Selamat datang di Desa Kubus, nak. Angin hari ini membawa kabar baik.', 'Makhluk yang kau rawat dengan hati akan bertarung dengan sepenuh jiwa.', 'Nyawa tidak tumbuh kembali seperti rumput. Jagalah baik-baik.', 'Di timur laut ada Tanah Gelap. Jangan ke sana tanpa persiapan.', 'Kesabaran adalah senjata terkuat seorang Champion.'] },
+    lines: ['Selamat datang di Kota Kubus, nak. Angin hari ini membawa kabar baik.', 'Makhluk yang kau rawat dengan hati akan bertarung dengan sepenuh jiwa.', 'Nyawa tidak tumbuh kembali seperti rumput. Jagalah baik-baik.', 'Di timur laut ada Tanah Gelap. Jangan ke sana tanpa persiapan.', 'Kesabaran adalah senjata terkuat seorang Champion.'] },
   { id: 'lila', name: 'Lila', role: 'Pecinta makhluk • wanita muda, ceria', look: { skin: '#f2c9a0', hair: '#ff8ac0', shirt: '#ff6fae', pants: '#ffffff', h: .98, longHair: true },
     voice: { pitch: 285, range: 6, speed: 7.2, wave: 'triangle', formant: 1.18, breath: .05, vib: [6, .012], style: 'bright' },
     lines: ['Haiii! Kamu trainer baru ya? Wah, makhlukmu lucu banget!', 'Kasih mereka makan biar bahagia ya! Makhluk bahagia lebih kuat lho!', 'Tahu nggak? Kalau Happiness tinggi, Fluffhop bisa berevolusi!', 'Yuk semangat! Hari ini cerah sekali!', 'Aku pernah lihat Leafling menari di bawah hujan. Imut banget!'] },
@@ -958,7 +958,7 @@ const NPCS = [
     lines: ['Makhlukmu kelelahan? Biar kurawat dengan lembut.', 'Istirahat itu penting, untuk makhluk dan juga untukmu.', 'Semoga harimu menyenangkan. Hati-hati di luar sana ya.'], healer: true },
 ];
 
-const BIOME_NAMES = { plains: 'Padang Rumput', forest: 'Hutan', desert: 'Gurun', mountain: 'Pegunungan', swamp: 'Rawa', dark: 'Tanah Gelap', village: 'Desa Kubus', beach: 'Pantai', cave: 'Gua' };
+const BIOME_NAMES = { plains: 'Padang Rumput', forest: 'Hutan', desert: 'Gurun', mountain: 'Pegunungan', swamp: 'Rawa', dark: 'Tanah Gelap', village: 'Kota Kubus', beach: 'Pantai', cave: 'Gua' };
 // Tabel spawn makhluk liar per biome: [species, bobot, waktu]
 const SPAWNS = {
   plains: [['fluffhop', 40, 'any'], ['leafling', 8, 'day'], ['flamecube', 6, 'day'], ['embird', 8, 'day'], ['voltbit', 6, 'any'], ['shadowbit', 14, 'night'], ['aquablock', 4, 'any']],
@@ -974,11 +974,11 @@ const SPAWNS = {
 /* --- HEWAN dunia (fauna realistis dari micro-voxel) ---
    biomes: bobot spawn per biome | snd: jenis suara | drops: [item, min, max] */
 const ANIMALS = {
-  sapi: { name: 'Sapi', hp: 24, speed: 1.0, biomes: { plains: 3, village: 2, savanna: 2 }, drops: [['raw_meat', 2, 3], ['leather', 0, 2]], snd: 'moo', herd: 3,
+  sapi: { name: 'Sapi', hp: 24, speed: 1.0, biomes: { plains: 3, savanna: 2 }, drops: [['raw_meat', 2, 3], ['leather', 0, 2]], snd: 'moo', herd: 3,
     look: { type: 'quad', body: [.66, .62, 1.25], leg: [.15, .58], neck: [.16, .45], neckR: .17, head: [.36, .36, .46], snout: [.32, .24, .16], snoutCol: '#e8b4a8', col: '#f4f2ec', col2: '#2a2420', belly: '#f4f2ec', pattern: 'spots', ears: 'side', horns: true, hornCol: '#e8e0c8', tail: 'tuft', udder: true, hoof: '#3a3028', graze: 1.1 } },
   domba: { name: 'Domba', hp: 16, speed: .9, biomes: { plains: 3, mountain: 2, tundra: 3 }, drops: [['raw_meat', 1, 2], ['wool', 1, 3]], snd: 'baa', herd: 3,
     look: { type: 'quad', body: [.64, .6, .88], leg: [.09, .4], neck: [.12, .5], neckR: .12, head: [.24, .28, .34], snout: [.18, .16, .1], snoutCol: '#4a3c36', col: '#efeadc', col2: '#4a3c36', faceCol: '#4a3c36', legCol: '#4a3c36', neckCol: '#efeadc', wool: true, ears: 'side', tail: 'short', hoof: '#2a2420', graze: 1.2 } },
-  ayam: { name: 'Ayam', hp: 6, speed: 1.3, biomes: { plains: 2, village: 4, forest: 1 }, drops: [['raw_meat', 1, 1], ['feather', 1, 2]], snd: 'cluck', herd: 2,
+  ayam: { name: 'Ayam', hp: 6, speed: 1.3, biomes: { plains: 2, village: 2, forest: 1 }, drops: [['raw_meat', 1, 1], ['feather', 1, 2]], snd: 'cluck', herd: 2,
     look: { type: 'bird', vs: .03, body: [.3, .3, .4], head: [.15, .17, .17], col: '#f6f2e8', belly: '#f6f2e8', beak: '#f0b020', legCol: '#f0b020', comb: '#e02a2a', tail: 'up', tailCol: '#f6f2e8', legH: .16, graze: 1.3 } },
   babi: { name: 'Babi Hutan', hp: 20, speed: 1.4, retaliate: true, dmg: 4, biomes: { forest: 3, swamp: 2, savanna: 1 }, drops: [['raw_meat', 2, 3]], snd: 'oink', herd: 2,
     look: { type: 'quad', body: [.5, .5, .95], leg: [.11, .3], neck: [.08, .1], neckR: .18, head: [.32, .32, .38], snout: [.18, .16, .14], snoutCol: '#7a5a48', col: '#5a4232', col2: '#3a2a20', belly: '#6a5040', ears: 'up', tusks: true, tail: 'thin', bristle: true, hoof: '#1a1410', graze: .8 } },
@@ -1024,6 +1024,39 @@ RECIPES.push(
 SHOP.push('cooked_meat', 'apple', 'leather_armor');
 B.SAVANNA = 42;
 defBlock(B.SAVANNA, { name: 'Rumput Sabana', tex: ['savanna_top', 'savanna_side', 'dirt'], hard: .6, drop: 'dirt', snd: 'grass', mc: '#a8a048' });
+Object.assign(B, { STONEBRICK: 43, BED: 44, BOOKSHELF: 45, STORAGE: 46, WOOL_R: 47, WOOL_B: 48, WOOL_Y: 49, WOOL_G: 50, ROOF_B: 51, ROOF_G: 52, ASPHALT: 53 });
+defBlock(B.STONEBRICK, { name: 'Bata Batu', tex: 'stonebrick', hard: 2.2, tier: 1, drop: 'stonebrick', snd: 'stone', mc: '#8c8c92' });
+defBlock(B.BED, { name: 'Kasur', tex: ['bed_top', 'bed_side', 'planks'], hard: .6, drop: 'bed', snd: 'cloth', mc: '#c0302a' });
+defBlock(B.BOOKSHELF, { name: 'Rak Buku', tex: ['planks', 'bookshelf', 'planks'], hard: 1.2, drop: 'bookshelf', snd: 'wood', mc: '#8a5a32' });
+defBlock(B.STORAGE, { name: 'Peti Penyimpanan', tex: ['chest_top', 'chest_side', 'chest_top'], hard: 1.2, drop: 'storage_chest', snd: 'wood', mc: '#a0662a' });
+defBlock(B.WOOL_R, { name: 'Wol Merah', tex: 'wool_red', hard: .6, drop: 'wool_red', snd: 'cloth', mc: '#c83a3a' });
+defBlock(B.WOOL_B, { name: 'Wol Biru', tex: 'wool_blue', hard: .6, drop: 'wool_blue', snd: 'cloth', mc: '#2e5aa8' });
+defBlock(B.WOOL_Y, { name: 'Wol Kuning', tex: 'wool_yellow', hard: .6, drop: 'wool_yellow', snd: 'cloth', mc: '#e8c030' });
+defBlock(B.WOOL_G, { name: 'Wol Hijau', tex: 'wool_green', hard: .6, drop: 'wool_green', snd: 'cloth', mc: '#3a9a48' });
+defBlock(B.ROOF_B, { name: 'Genteng Biru', tex: 'roof_blue', hard: 1.2, drop: 'roof_blue', snd: 'stone', mc: '#2e5aa8' });
+defBlock(B.ROOF_G, { name: 'Genteng Hijau', tex: 'roof_green', hard: 1.2, drop: 'roof_green', snd: 'stone', mc: '#2e8a4a' });
+defBlock(B.ASPHALT, { name: 'Aspal', tex: 'asphalt', hard: 1.8, tier: 1, drop: 'asphalt', snd: 'stone', mc: '#3a3a42' });
+const USABLE = new Set([B.BED, B.STORAGE, B.TABLE]);
+Object.assign(ITEMS, {
+  stonebrick: { name: 'Bata Batu', cat: 'block', block: B.STONEBRICK, price: 4 }, asphalt: { name: 'Aspal', cat: 'block', block: B.ASPHALT, price: 3 },
+  bed: { name: 'Kasur', cat: 'block', block: B.BED, price: 60, desc: 'Taruh di rumahmu, lalu klik kanan / F: tidur di malam hari & simpan titik bangun.' },
+  bookshelf: { name: 'Rak Buku', cat: 'block', block: B.BOOKSHELF, price: 25 },
+  storage_chest: { name: 'Peti Penyimpanan', cat: 'block', block: B.STORAGE, price: 40, desc: 'Semua peti terhubung ke gudang rumahmu. Klik kanan / F untuk membuka.' },
+  wool_red: { name: 'Wol Merah', cat: 'block', block: B.WOOL_R, price: 4 }, wool_blue: { name: 'Wol Biru', cat: 'block', block: B.WOOL_B, price: 4 },
+  wool_yellow: { name: 'Wol Kuning', cat: 'block', block: B.WOOL_Y, price: 4 }, wool_green: { name: 'Wol Hijau', cat: 'block', block: B.WOOL_G, price: 4 },
+  roof_blue: { name: 'Genteng Biru', cat: 'block', block: B.ROOF_B, price: 4 }, roof_green: { name: 'Genteng Hijau', cat: 'block', block: B.ROOF_G, price: 4 },
+});
+RECIPES.push(
+  { out: 'bed', n: 1, in: { wool: 3, planks: 3 }, cat: 'Rumah', station: 'table' },
+  { out: 'storage_chest', n: 1, in: { planks: 8 }, cat: 'Rumah', station: 'table' },
+  { out: 'bookshelf', n: 1, in: { planks: 6, leather: 1 }, cat: 'Rumah', station: 'table' },
+  { out: 'stonebrick', n: 4, in: { cobble: 4 }, cat: 'Rumah', station: 'table' },
+  { out: 'wool_red', n: 1, in: { wool: 1, berry: 1 }, cat: 'Rumah' }, { out: 'wool_green', n: 1, in: { wool: 1, herb: 1 }, cat: 'Rumah' },
+  { out: 'wool_blue', n: 1, in: { wool: 1, crystal_shard: 1 }, cat: 'Rumah' }, { out: 'wool_yellow', n: 1, in: { wool: 1, gold_ore: 1 }, cat: 'Rumah' },
+  { out: 'roof_blue', n: 4, in: { roof: 4, crystal_shard: 1 }, cat: 'Rumah' }, { out: 'roof_green', n: 4, in: { roof: 4, herb: 2 }, cat: 'Rumah' },
+  { out: 'roof', n: 4, in: { brick: 2, mud: 2 }, cat: 'Rumah', station: 'table' },
+);
+SHOP.push('bed', 'storage_chest', 'wool', 'stonebrick');
 Object.assign(BIOME_NAMES, { tundra: 'Tundra Salju', savanna: 'Sabana' });
 Object.assign(SPAWNS, {
   tundra: [['crystalith', 28, 'any'], ['fluffhop', 18, 'any'], ['rockmon', 10, 'any'], ['shadowbit', 12, 'night']],
@@ -1527,7 +1560,7 @@ const Music = {
 const TILE_NAMES = ['grass_top', 'grass_side', 'dirt', 'stone', 'sand', 'water', 'log_side', 'log_top', 'leaves', 'planks', 'cobble', 'coal_ore', 'iron_ore', 'gold_ore', 'crystal', 'snow',
   'sandstone', 'sandstone_top', 'cactus_side', 'cactus_top', 'mud', 'swamp_top', 'swamp_side', 'dark_top', 'dark_side', 'darkstone', 'mooncrystal', 'glass', 'table_top', 'table_side', 'bedrock', 'torch',
   'berrybush', 'flower_r', 'flower_y', 'tallgrass', 'mushroom', 'roof', 'brick', 'deadlog', 'deadlog_top', 'ice', 'herb', 'lantern', 'darkleaves', 'path', 'wool', 'pineleaves', 'snowgrass_side',
-  'crack0', 'crack1', 'crack2', 'crack3', 'crack4', 'savanna_top', 'savanna_side'];
+  'crack0', 'crack1', 'crack2', 'crack3', 'crack4', 'savanna_top', 'savanna_side', 'stonebrick', 'asphalt', 'bed_top', 'bed_side', 'bookshelf', 'chest_top', 'chest_side', 'wool_red', 'wool_blue', 'wool_yellow', 'wool_green', 'roof_blue', 'roof_green'];
 const TILE = {}; TILE_NAMES.forEach((n, i) => TILE[n] = i);
 const Atlas = {
   size: 256, ts: 16, per: 16,
@@ -1614,6 +1647,18 @@ const Atlas = {
       case 'wool': fill('#eeeeee', .05); specks('#dddddd', 12); break;
       case 'savanna_top': fill('#a8a048', .14); specks('#c8b860', 10); specks('#8a8238', 8); break;
       case 'savanna_side': sideTop('#8a5d3b', '#a8a048'); break;
+      case 'stonebrick': fill('#8c8c92', .07, (x, y) => (y % 4 === 3 || (x + (Math.floor(y / 4) % 2) * 4) % 8 === 0) ? '#5e5e66' : null); break;
+      case 'asphalt': fill('#3a3a42', .12); specks('#55555e', 10); specks('#2a2a30', 8); break;
+      case 'bed_top': for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) px(x, y, (x === 0 || x === 15) ? '#7a5a30' : y < 5 ? shade('#f2f2f2', .9 + r() * .1) : (y % 4 === 1 ? '#a82820' : shade('#c8302a', .9 + r() * .15))); break;
+      case 'bed_side': for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) px(x, y, y < 2 ? '#f0f0f0' : y < 9 ? shade('#c8302a', .9 + r() * .15) : (y > 12 && x > 2 && x < 13) ? '#5a3a20' : shade('#9a6a3a', .9 + r() * .15)); break;
+      case 'bookshelf': for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) { const row = y % 8; px(x, y, row < 1 || row > 6 ? '#9a6a3a' : (x === 0 || x === 15) ? '#7a5030' : ['#c0392b', '#2e86c1', '#27ae60', '#f1c40f', '#8e44ad', '#e67e22'][Math.floor((x + Math.floor(y / 8) * 3) / 2) % 6]); } break;
+      case 'chest_top': fill('#a0662a', .08, (x, y) => (x === 0 || y === 0 || x === 15 || y === 15) ? '#5a3a18' : null); break;
+      case 'chest_side': fill('#a0662a', .08, (x, y) => (x === 0 || x === 15 || y === 0 || y === 15 || y === 5) ? '#5a3a18' : (y >= 4 && y <= 7 && x >= 7 && x <= 8) ? '#ffd23a' : null); break;
+      case 'wool_red': fill('#c83a3a', .05); specks('#a82828', 10); break;
+      case 'wool_blue': fill('#2e5aa8', .05); specks('#244a90', 10); break;
+      case 'wool_yellow': fill('#e8c030', .05); specks('#c8a020', 10); break;
+      case 'wool_green': fill('#3a9a48', .05); specks('#2a7a38', 10); break;
+      case 'roof_blue': case 'roof_green': { const c = name === 'roof_blue' ? '#2e5aa8' : '#2e8a4a'; fill(c, .08, (x, y) => (y % 4 === 3) ? shade(c, .65) : ((x + Math.floor(y / 4) * 4) % 8 === 0) ? shade(c, .8) : null); break; }
       default: if (name.startsWith('crack')) { clear(); const lv = +name.slice(5); const rr = mulberry32(77); for (let k = 0; k < 4 + lv * 6; k++) { let x = 8, y = 8; const dx = rr() < .5 ? -1 : 1, dy = rr() < .5 ? -1 : 1; for (let s = 0; s < 3 + lv * 1.2; s++) { px(x, y, 'rgba(0,0,0,0.75)'); if (rr() < .5) x += dx; else y += dy; x = clamp(x, 0, 15); y = clamp(y, 0, 15); } } }
     }
   }
@@ -2578,15 +2623,15 @@ async function generateWorld(world, seed, progress) {
     for (let x = 0; x < W; x++) {
       const dx = x - cx, dz = z - cz, dist = Math.hypot(dx, dz), r = dist / (W / 2);
       const ang = Math.atan2(dz, dx) + N1.n2(x * .02, z * .02) * .55;
-      const fade = smooth(.1, .3, r);
+      const cheb = Math.max(Math.abs(dx), Math.abs(dz)), fade = smooth(.42, .62, r);
       let tot = 0, h = 0, best = 'plains', bw = 0;
       const wp = 1.6 * (1 - fade) + .05; tot += wp; h += wp * hFn.plains(x, z); bw = wp;
       for (const [b, a] of SECT) { const d = angDist(ang, a); const w = Math.exp(-Math.pow(d / .42, 2)) * fade; if (w < .001) continue; tot += w; h += w * hFn[b](x, z); if (w > bw) { bw = w; best = b; } }
       h /= tot;
       const edge = smooth(.8, .98, r); h = lerp(h, 9, edge);
-      if (dist < 15) h = 18; else if (dist < 27) h = lerp(18, h, smooth(15, 27, dist));
+      if (cheb < CITY_R + 4) h = 18; else if (cheb < CITY_R + 16) h = lerp(18, h, smooth(CITY_R + 4, CITY_R + 16, cheb));
       h = Math.floor(clamp(h, 3, H - 6));
-      let bio = dist < 18 ? 'village' : best;
+      let bio = cheb < CITY_R + 3 ? 'village' : best;
       if (bio !== 'swamp' && bio !== 'village' && h <= SEA && edge > .05) bio = 'beach';
       if (h < SEA - 1 && bio !== 'swamp' && edge > .2) bio = 'beach';
       world.heights[x + z * W] = h; world.biome[x + z * W] = BI[bio];
@@ -2621,7 +2666,7 @@ async function generateWorld(world, seed, progress) {
   for (let z = 1; z < D - 1; z++) {
     for (let x = 1; x < W - 1; x++) {
       const bio = BIOME_LIST[world.biome[x + z * W]]; if (bio !== 'mountain' && bio !== 'dark' && bio !== 'forest') continue;
-      const h = world.heights[x + z * W]; if (Math.hypot(x - cx, z - cz) < 30) continue;
+      const h = world.heights[x + z * W]; if (Math.max(Math.abs(x - cx), Math.abs(z - cz)) < CITY_R + 10) continue;
       const lim = bio === 'mountain' ? h - 1 : h - 4;
       for (let y = 4; y < lim; y++) {
         const n = N4.n3(x * .065, y * .1, z * .065), n2 = N3.n3(x * .03 + 50, y * .05, z * .03);
@@ -2654,7 +2699,7 @@ async function generateWorld(world, seed, progress) {
   for (let z = 3; z < D - 3; z++) for (let x = 3; x < W - 3; x++) {
     const i = x + z * W, h = world.heights[i], bio = BIOME_LIST[world.biome[i]], top = world.get(x, h, z), y = h + 1;
     if (world.get(x, y, z) !== B.AIR) continue;
-    const dv = Math.hypot(x - cx, z - cz); if (dv < 19) continue;
+    if (Math.max(Math.abs(x - cx), Math.abs(z - cz)) < CITY_R + 5) continue;
     const r = rng();
     const grassy = top === B.GRASS || top === B.SWAMPGRASS || top === B.DARKGRASS || top === B.SNOWGRASS || top === B.SAVANNA;
     if (bio === 'forest' && grassy) { if (r < .055) tree(x, y, z, 'oak'); else if (r < .2) world.setRaw(x, y, z, B.TALLGRASS); else if (r < .225) world.setRaw(x, y, z, rng() < .5 ? B.FLOWER_R : B.FLOWER_Y); else if (r < .24) world.setRaw(x, y, z, B.BERRYBUSH); else if (r < .252) world.setRaw(x, y, z, B.HERB); else if (r < .26) world.setRaw(x, y, z, B.MUSHROOM); }
@@ -2666,15 +2711,15 @@ async function generateWorld(world, seed, progress) {
     else if (bio === 'savanna' && top === B.SAVANNA) { if (r < .012) { const th = 4 + Math.floor(rng() * 2), ox = ri(-1, 1), oz = ri(-1, 1); for (let i = 0; i < th; i++) world.setRaw(x + (i > 2 ? ox : 0), y + i, z + (i > 2 ? oz : 0), B.LOG); for (let a = -3; a <= 3; a++) for (let b = -3; b <= 3; b++) { if (Math.abs(a) + Math.abs(b) > 4) continue; const tx = x + ox + a, tz = z + oz + b; if (!world.get(tx, y + th, tz)) world.setRaw(tx, y + th, tz, B.LEAVES); if (Math.abs(a) + Math.abs(b) < 2 && !world.get(tx, y + th + 1, tz)) world.setRaw(tx, y + th + 1, tz, B.LEAVES); } } else if (r < .2) world.setRaw(x, y, z, B.TALLGRASS); else if (r < .205) world.setRaw(x, y, z, B.BERRYBUSH); }
     else if (bio === 'dark' && top === B.DARKGRASS) { if (r < .025) tree(x, y, z, 'dead'); else if (r < .035) { const ch = 1 + Math.floor(rng() * 3); for (let k = 0; k < ch; k++) world.setRaw(x, y + k, z, B.MOONCRYSTAL); } else if (r < .06) world.setRaw(x, y, z, B.MUSHROOM); else if (r < .1) world.setRaw(x, y, z, B.TALLGRASS); }
   }
-  progress && progress(.66, 'Membangun Desa Kubus...'); await nextFrame();
-  const meta = buildVillage(world, Math.floor(cx), Math.floor(cz), rng);
+  progress && progress(.66, 'Membangun Kota Kubus...'); await nextFrame();
+  const meta = buildCity(world, Math.floor(cx), Math.floor(cz), rng);
   world.computeHeights();
   // ---- Tahap 6: lokasi serangga rahasia ----
   meta.bugSpots = [];
   let tries = 0;
   while (meta.bugSpots.length < 8 && tries++ < 5000) {
     const x = 6 + Math.floor(rng() * (W - 12)), z = 6 + Math.floor(rng() * (D - 12)); const i = x + z * W;
-    const dv = Math.hypot(x - cx, z - cz); if (dv < 26) continue;
+    if (Math.max(Math.abs(x - cx), Math.abs(z - cz)) < CITY_R + 9) continue;
     const h = world.heights[i], top = world.get(x, h, z);
     if (![B.GRASS, B.DARKGRASS, B.SWAMPGRASS, B.DIRT, B.SAVANNA, B.SNOWGRASS].includes(top)) continue;
     if (world.get(x, h + 1, z) !== B.AIR) continue;
@@ -2684,57 +2729,211 @@ async function generateWorld(world, seed, progress) {
   return meta;
 }
 
-/* --- Desa Kubus: rumah, klinik, toko, sumur, lentera, kebun --- */
-function buildVillage(world, cx, cz, rng) {
-  const ri = (a, b) => a + Math.floor(rng() * (b - a + 1)), pk = arr => arr[Math.floor(rng() * arr.length)];
-  const GY = 18, set = (x, y, z, id) => world.setRaw(x, y, z, id);
-  for (let x = cx - 20; x <= cx + 20; x++) for (let z = cz - 20; z <= cz + 20; z++) { if (Math.hypot(x - cx, z - cz) > 20) continue; for (let y = GY + 1; y < GY + 12; y++) if (world.get(x, y, z) !== B.WATER || y > SEA) set(x, y, z, B.AIR); if (Math.hypot(x - cx, z - cz) < 15) set(x, GY, z, B.GRASS); }
-  // jalan
-  for (let k = -19; k <= 19; k++) for (let w = -1; w <= 1; w++) { set(cx + k, GY, cz + w, B.PATH); set(cx + w, GY, cz + k, B.PATH); }
-  // sumur
-  for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) { const edge = Math.abs(a) === 2 || Math.abs(b) === 2; set(cx + a, GY, cz + b, edge ? B.COBBLE : B.WATER); set(cx + a, GY - 1, cz + b, edge ? B.COBBLE : B.WATER); if (edge) set(cx + a, GY + 1, cz + b, Math.abs(a) === 2 && Math.abs(b) === 2 ? B.LOG : B.AIR); }
-  for (const [a, b] of [[-2, -2], [2, -2], [-2, 2], [2, 2]]) { set(cx + a, GY + 2, cz + b, B.LOG); set(cx + a, GY + 3, cz + b, B.LOG); }
-  for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) set(cx + a, GY + 4, cz + b, B.ROOF);
-  set(cx, GY + 5, cz, B.LANTERN);
-  const meta = { spawn: new THREE.Vector3(cx + .5, GY + 1, cz + 5.5), npcSpots: {}, signs: [], center: new THREE.Vector3(cx + .5, GY + 1, cz + .5), GY };
-  // rumah
-  const house = (x0, z0, w, d, door, wall, label) => {
-    for (let x = x0; x < x0 + w; x++) for (let z = z0; z < z0 + d; z++) {
-      set(x, GY, z, B.PLANKS); for (let y = GY + 1; y <= GY + 6; y++) set(x, y, z, B.AIR);
-      const edge = x === x0 || x === x0 + w - 1 || z === z0 || z === z0 + d - 1, corner = (x === x0 || x === x0 + w - 1) && (z === z0 || z === z0 + d - 1);
-      if (edge) for (let y = GY + 1; y <= GY + 4; y++) set(x, y, z, corner ? B.LOG : wall);
-      if (!edge || corner) continue;
-      const midX = x === x0 + Math.floor(w / 2), midZ = z === z0 + Math.floor(d / 2);
-      if ((z === z0 || z === z0 + d - 1) && (x === x0 + 1 || x === x0 + w - 2)) { set(x, GY + 2, z, B.GLASS); set(x, GY + 3, z, B.GLASS); }
-      if ((x === x0 || x === x0 + w - 1) && midZ) { set(x, GY + 2, z, B.GLASS); set(x, GY + 3, z, B.GLASS); }
+/* --- KOTA KUBUS: kota besar bertembok — jalan raya, alun-alun, air mancur, rumah warga, apartemen,
+       pasar, balai kota, klinik, arena, taman, kebun, perpustakaan, menara jaga & RUMAH KITA --- */
+const CITY_R = 37;
+function buildCity(world, cx, cz, rng) {
+  const GY = 18, R = CITY_R, ri = (a, b) => a + Math.floor(rng() * (b - a + 1)), pk = arr => arr[Math.floor(rng() * arr.length)];
+  const S = (x, y, z, id) => world.setRaw(cx + x, y, cz + z, id), G = (x, y, z) => world.get(cx + x, y, cz + z);
+  const rect = (x0, z0, x1, z1, y, id) => { for (let x = Math.min(x0, x1); x <= Math.max(x0, x1); x++) for (let z = Math.min(z0, z1); z <= Math.max(z0, z1); z++) S(x, y, z, id); };
+  const meta = { spawn: null, npcSpots: {}, signs: [], center: new THREE.Vector3(cx + .5, GY + 1, cz + .5), GY, half: R + 1, cx, cz, segs: [], pois: [], home: null };
+  const W = (x, z) => [cx + x + .5, cz + z + .5];
+  const sign = (text, x, y, z) => meta.signs.push({ text, x: cx + x + .5, y, z: cz + z + .5 });
+  const post = (x, z, h = 2) => { for (let y = 1; y <= h; y++) S(x, GY + y, z, B.LOG); S(x, GY + h + 1, z, B.LANTERN); };
+  const oak = (x, z) => { const th = 4 + ri(0, 1); for (let i = 1; i <= th; i++) S(x, GY + i, z, B.LOG); for (let ly = th - 1; ly <= th + 2; ly++) { const r = ly > th ? 1 : 2; for (let a = -r; a <= r; a++) for (let b = -r; b <= r; b++) { if (Math.abs(a) === r && Math.abs(b) === r && rng() < .5) continue; if (G(x + a, GY + ly, z + b) === B.AIR) S(x + a, GY + ly, z + b, B.LEAVES); } } };
+  // ---- 1. ratakan tanah kota ----
+  for (let x = -R - 3; x <= R + 3; x++) for (let z = -R - 3; z <= R + 3; z++) { for (let y = GY + 1; y < GY + 26; y++) S(x, y, z, B.AIR); S(x, GY, z, B.GRASS); S(x, GY - 1, z, B.DIRT); S(x, GY - 2, z, B.DIRT); }
+  // ---- 2. jalan raya, trotoar, jalan lingkar & gang ----
+  for (const s of [-1, 1]) { rect(19 * s, -21, 21 * s, 21, GY, B.PATH); rect(-21, 19 * s, 21, 21 * s, GY, B.PATH); rect(22 * s, -36, 23 * s, 36, GY, B.PATH); rect(-36, 22 * s, 36, 23 * s, GY, B.PATH); }
+  rect(-2, -R, 2, R, GY, B.ASPHALT); rect(-R, -2, R, 2, GY, B.ASPHALT);
+  for (const s of [-3, 3]) { rect(s, -R, s, R, GY, B.STONEBRICK); rect(-R, s, R, s, GY, B.STONEBRICK); }
+  // ---- 3. alun-alun + air mancur + bangku + lentera ----
+  for (let x = -8; x <= 8; x++) for (let z = -8; z <= 8; z++) S(x, GY, z, (Math.abs(x) + Math.abs(z)) % 4 === 0 ? B.COBBLE : B.STONEBRICK);
+  for (let x = -2; x <= 2; x++) for (let z = -2; z <= 2; z++) { const e = Math.abs(x) === 2 || Math.abs(z) === 2; S(x, GY, z, e ? B.STONEBRICK : B.WATER); S(x, GY - 1, z, e ? B.STONEBRICK : B.WATER); if (e) S(x, GY + 1, z, B.STONEBRICK); }
+  S(0, GY + 1, 0, B.STONEBRICK); S(0, GY + 2, 0, B.STONEBRICK); S(0, GY + 3, 0, B.WATER); S(0, GY + 4, 0, B.LANTERN);
+  for (const [a, b] of [[-7, -7], [7, -7], [-7, 7], [7, 7]]) post(a, b, 3);
+  for (const s of [-1, 1]) { for (const t of [-6, -5, 5, 6]) { S(t, GY + 1, 6 * s, B.PLANKS); S(6 * s, GY + 1, t, B.PLANKS); } }
+  for (const [a, b] of [[-5, -5], [5, -5], [-5, 5], [5, 5]]) { S(a, GY + 1, b, pk([B.FLOWER_R, B.FLOWER_Y])); }
+  sign('⛲ Alun-Alun Kota Kubus', 0, GY + 5.4, 0);
+  meta.pois.push({ x: cx + 4.5, z: cz + 4.5, r: 3.5, kind: 'plaza' }, { x: cx - 4.5, z: cz - 4.5, r: 3.5, kind: 'plaza' }, { x: cx + 4.5, z: cz - 4.5, r: 3.5, kind: 'plaza' });
+  // ---- 4. tembok kota, gerbang & menara sudut ----
+  for (let i = -R; i <= R; i++) for (const [x, z, along] of [[i, -R, i], [i, R, i], [-R, i, i], [R, i, i]]) {
+    if (Math.abs(along) <= 3) continue;
+    for (let y = GY + 1; y <= GY + 3; y++) S(x, y, z, B.STONEBRICK); if (i % 2 === 0) S(x, GY + 4, z, B.STONEBRICK);
+  }
+  for (const [gx, gz, ax] of [[0, -R, 1], [0, R, 1], [-R, 0, 0], [R, 0, 0]]) {
+    for (let k = -4; k <= 4; k++) { const x = ax ? gx + k : gx, z = ax ? gz : gz + k; if (Math.abs(k) === 4) { for (let y = GY + 1; y <= GY + 5; y++) S(x, y, z, B.STONEBRICK); S(x, GY + 6, z, B.LANTERN); } else S(x, GY + 5, z, B.STONEBRICK); }
+  }
+  sign('🏙 KOTA KUBUS', 0, GY + 7, -R); sign('🏙 KOTA KUBUS', 0, GY + 7, R);
+  for (const [tx, tz] of [[-R, -R], [R, -R], [-R, R], [R, R]]) {
+    for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) { for (let y = GY + 1; y <= GY + 7; y++) S(tx + a, y, tz + b, B.STONEBRICK); if ((Math.abs(a) === 2 || Math.abs(b) === 2) && (a + b) % 2 === 0) S(tx + a, GY + 8, tz + b, B.STONEBRICK); }
+    S(tx, GY + 8, tz, B.LANTERN);
+  }
+  // ---- 5. pembangun gedung serbaguna ----
+  // door: 'n' | 's' | 'e' | 'w'. Mengembalikan posisi pintu (di luar)
+  function building(x0, z0, w, d, o) {
+    const floors = o.floors || 1, H = 4, wall = o.wall || B.PLANKS, top = GY + floors * H, x1 = x0 + w - 1, z1 = z0 + d - 1, door = o.door;
+    for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) {
+      const edge = x === x0 || x === x1 || z === z0 || z === z1, corner = (x === x0 || x === x1) && (z === z0 || z === z1);
+      S(x, GY, z, edge ? (o.base || B.COBBLE) : (o.floorBlk || B.PLANKS));
+      for (let f = 0; f < floors; f++) {
+        const yb = GY + f * H;
+        if (f > 0) S(x, yb, z, edge ? (o.trim || wall) : B.PLANKS);
+        for (let y = yb + 1; y < yb + H; y++) {
+          if (!edge) { S(x, y, z, B.AIR); continue; }
+          let id = corner ? (o.corner || B.LOG) : wall;
+          const along = (z === z0 || z === z1) ? x - x0 : z - z0, len = (z === z0 || z === z1) ? w : d;
+          if (!corner && along > 0 && along < len - 1 && along % 3 !== 0 && (y === yb + 2 || (o.tall && y === yb + 3))) id = B.GLASS;
+          S(x, y, z, id);
+        }
+      }
+      if (o.flat) { S(x, top, z, o.roofBlk || B.STONEBRICK); if (edge) S(x, top + 1, z, o.roofBlk || B.STONEBRICK); }
+      else S(x, top, z, B.PLANKS);
     }
-    let dx, dz;
-    if (door === 'n') { dx = x0 + Math.floor(w / 2); dz = z0; } else if (door === 's') { dx = x0 + Math.floor(w / 2); dz = z0 + d - 1; } else if (door === 'w') { dx = x0; dz = z0 + Math.floor(d / 2); } else { dx = x0 + w - 1; dz = z0 + Math.floor(d / 2); }
-    set(dx, GY + 1, dz, B.AIR); set(dx, GY + 2, dz, B.AIR);
-    for (let k = 0; k < 4; k++) for (let x = x0 - 1 + k; x <= x0 + w - k; x++) for (let z = z0 - 1 + k; z <= z0 + d - k; z++) set(x, GY + 5 + k, z, B.ROOF);
-    set(x0 + Math.floor(w / 2), GY + 4, z0 + Math.floor(d / 2), B.LANTERN);
-    const out = { x: dx + (door === 'w' ? -1.5 : door === 'e' ? 2.5 : .5), z: dz + (door === 'n' ? -1.5 : door === 's' ? 2.5 : .5) };
-    if (label) meta.signs.push({ text: label, x: dx + .5, y: GY + 3.6, z: dz + (door === 'n' ? -.3 : door === 's' ? 1.3 : .5) });
-    return out;
+    if (!o.flat) { const rb = o.roof || B.ROOF; for (let k = 0; ; k++) { const ax0 = x0 - 1 + k, ax1 = x1 + 1 - k, az0 = z0 - 1 + k, az1 = z1 + 1 - k; if (ax0 > ax1 || az0 > az1) break; rect(ax0, az0, ax1, az1, top + 1 + k, rb); } }
+    // pintu + teras
+    let dx, dz, ox = 0, oz = 0;
+    if (door === 'n') { dx = x0 + (w >> 1); dz = z0; oz = -1; } else if (door === 's') { dx = x0 + (w >> 1); dz = z1; oz = 1; } else if (door === 'w') { dx = x0; dz = z0 + (d >> 1); ox = -1; } else { dx = x1; dz = z0 + (d >> 1); ox = 1; }
+    S(dx, GY + 1, dz, B.AIR); S(dx, GY + 2, dz, B.AIR); S(dx, GY, dz, B.PLANKS);
+    if (ox) { S(dx, GY + 3, dz + 1, B.LANTERN); } else S(dx + 1, GY + 3, dz, B.LANTERN);
+    for (let k = 1; k <= (o.pathLen || 2); k++) { const px = dx + ox * k, pz = dz + oz * k; if (G(px, GY, pz) === B.GRASS) S(px, GY, pz, B.PATH); }
+    // tangga ke lantai 2
+    if (floors > 1 && o.stairs !== false) {
+      const alongX = door === 'n' || door === 's';
+      for (let k = 0; k < 4; k++) {
+        const sx = alongX ? x0 + 1 + k : (door === 'w' ? x1 - 1 : x0 + 1), sz = alongX ? (door === 'n' ? z1 - 1 : z0 + 1) : z0 + 1 + k;
+        S(sx, GY + 1 + k, sz, B.PLANKS); if (k >= 1) S(sx, GY + H, sz, B.AIR);
+        const nx = alongX ? sx + 1 : sx, nz = alongX ? sz : sz + 1; if (k === 3) S(nx, GY + H, nz, B.PLANKS);
+      }
+    }
+    if (o.label) sign(o.label, dx + ox * .6, GY + 3.8, dz + oz * .6);
+    // lampu gantung di plafon
+    S(x0 + (w >> 1), GY + H, z0 + (d >> 1) + (floors > 1 ? 1 : 0), B.LANTERN);
+    return { x: dx + ox * 1.5, z: dz + oz * 1.5, x0, z0, x1, z1, top };
+  }
+  const furnish = (b, kind) => {
+    const { x0, z0, x1, z1 } = b, ix0 = x0 + 1, ix1 = x1 - 1, iz0 = z0 + 1, iz1 = z1 - 1, cxm = (ix0 + ix1) >> 1, czm = (iz0 + iz1) >> 1;
+    const free = (x, z) => G(x, GY + 1, z) === B.AIR && G(x, GY + 2, z) === B.AIR;
+    const place = (x, z, id) => { if (free(x, z)) S(x, GY + 1, z, id); };
+    if (kind === 'home') return;
+    place(ix0, iz1, B.BED); place(ix1, iz1, B.BOOKSHELF); place(ix1, iz0, B.PLANKS);
+    for (let x = cxm - 1; x <= cxm; x++) for (let z = czm - 1; z <= czm; z++) if (G(x, GY, z) === B.PLANKS) S(x, GY, z, pk([B.WOOL_R, B.WOOL_B, B.WOOL_G, B.WOOL_Y]));
   };
-  const h1 = house(cx - 13, cz - 11, 7, 6, 's', B.PLANKS, '🏠 Rumah Pak Bram');
-  const h2 = house(cx + 6, cz - 11, 7, 6, 's', B.BRICK, '🛒 Toko Pak Rudi');
-  const h3 = house(cx - 13, cz + 5, 7, 6, 'n', B.WOOL, '🏥 Klinik Suster Mira');
-  const h4 = house(cx + 6, cz + 5, 7, 6, 'n', B.PLANKS, '🏡 Rumah Nenek Sari');
-  const h5 = house(cx - 3, cz - 19, 6, 5, 's', B.COBBLE, '⚒ Bengkel');
-  set(cx - 1, GY + 1, cz - 17, B.TABLE);
-  // meja crafting umum
-  set(cx + 3, GY + 1, cz - 3, B.TABLE); meta.signs.push({ text: '⚒ Meja Crafting', x: cx + 3.5, y: GY + 2.6, z: cz - 2.5 });
-  // lentera jalan
-  for (const [a, b] of [[-6, -3], [6, 3], [-6, 3], [6, -3], [-3, 9], [3, -9], [-15, 2], [15, -2]]) { set(cx + a, GY + 1, cz + b, B.LOG); set(cx + a, GY + 2, cz + b, B.LOG); set(cx + a, GY + 3, cz + b, B.LANTERN); }
-  // kebun beri & bunga
-  for (let a = 0; a < 6; a++) for (let b = 0; b < 3; b++) { set(cx + 10 + a, GY, cz + 14 + b, B.DIRT); set(cx + 10 + a, GY + 1, cz + 14 + b, B.BERRYBUSH); }
-  for (let k = 0; k < 26; k++) { const x = cx + ri(-14, 14), z = cz + ri(-14, 14); if (world.get(x, GY, z) === B.GRASS && world.get(x, GY + 1, z) === B.AIR) set(x, GY + 1, z, pk([B.FLOWER_R, B.FLOWER_Y, B.TALLGRASS, B.HERB])); }
-  // pagar batas desa (pos jaga)
-  for (const [a, b] of [[0, 18], [18, 0], [-18, 0], [0, -21]]) { set(cx + a + 2, GY + 1, cz + b, B.COBBLE); set(cx + a + 2, GY + 2, cz + b, B.COBBLE); set(cx + a + 2, GY + 3, cz + b, B.TORCH); }
-  meta.npcSpots = {
-    bram: [cx - 9.5, cz - 3.5], lila: [cx + 4.5, cz + 3.5], tito: [cx - 3.5, cz + 2.5], sari: [h4.x, h4.z], rudi: [h2.x, h2.z], garda: [cx + 2.5, cz + 15.5], mira: [h3.x, h3.z],
+  const yard = (L, n = 4) => { for (let k = 0; k < n; k++) { const x = ri(L.x0, L.x1), z = ri(L.z0, L.z1); if (G(x, GY, z) === B.GRASS && G(x, GY + 1, z) === B.AIR) S(x, GY + 1, z, pk([B.FLOWER_R, B.FLOWER_Y, B.TALLGRASS, B.HERB])); } };
+  // ---- 6. kavling per kuadran ----
+  const PLAN = {
+    '-1,-1': { inner: 'market', O1: 'sari', O2: 'apart', O3: 'park', O4: 'house', O5: 'library' },
+    '1,-1': { inner: 'townhall', O1: 'apart', O2: 'house', O3: 'arena', O4: 'house', O5: 'house' },
+    '-1,1': { inner: 'clinic', O1: 'house', O2: 'house', O3: 'farm', O4: 'apart', O5: 'house' },
+    '1,1': { inner: 'home', O1: 'house', O2: 'apart', O3: 'park', O4: 'house', O5: 'tower' },
   };
+  const WALLS = [B.PLANKS, B.BRICK, B.WOOL, B.SANDSTONE, B.COBBLE, B.STONEBRICK], ROOFS = [B.ROOF, B.ROOF_B, B.ROOF_G];
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const plan = PLAN[sx + ',' + sz], faceA = sx > 0 ? 'w' : 'e', faceB = sz > 0 ? 'n' : 's';
+    const lot = (a0, a1, b0, b1) => ({ x0: Math.min(sx * a0, sx * a1), x1: Math.max(sx * a0, sx * a1), z0: Math.min(sz * b0, sz * b1), z1: Math.max(sz * b0, sz * b1) });
+    const lots = { inner: [lot(8, 18, 8, 18), faceA], O1: [lot(24, 32, 4, 12), faceA], O2: [lot(24, 32, 13, 21), faceA], O3: [lot(25, 33, 25, 33), faceA], O4: [lot(13, 21, 25, 33), faceB], O5: [lot(4, 12, 25, 33), faceB] };
+    for (const key in lots) {
+      const [L, face] = lots[key], kind = plan[key], lw = L.x1 - L.x0 + 1, ld = L.z1 - L.z0 + 1;
+      if (kind === 'house' || kind === 'sari') {
+        const w = Math.min(lw, ri(7, 9)), d = Math.min(ld, ri(6, 8)), x0 = L.x0 + ((lw - w) >> 1), z0 = L.z0 + ((ld - d) >> 1);
+        const b = building(x0, z0, w, d, { door: face, wall: kind === 'sari' ? B.WOOL : pk(WALLS), roof: kind === 'sari' ? B.ROOF_G : pk(ROOFS), floors: rng() < .4 ? 2 : 1, label: kind === 'sari' ? '🏡 Rumah Nenek Sari' : null });
+        furnish(b); yard(L, 6); if (rng() < .6) oak(face === 'w' || face === 'e' ? (face === 'w' ? L.x1 : L.x0) : L.x0, face === 'n' ? L.z1 : face === 's' ? L.z0 : L.z1);
+        if (kind === 'sari') meta.npcSpots.sari = [cx + b.x + .5, cz + b.z + .5];
+      } else if (kind === 'apart') {
+        const w = Math.min(lw, 9), d = Math.min(ld, 8), x0 = L.x0 + ((lw - w) >> 1), z0 = L.z0 + ((ld - d) >> 1);
+        const b = building(x0, z0, w, d, { door: face, wall: pk([B.BRICK, B.STONEBRICK, B.SANDSTONE, B.WOOL]), corner: B.STONEBRICK, floors: ri(3, 5), flat: true, tall: true, label: '🏢 Apartemen', stairs: true });
+        furnish(b); yard(L, 3);
+      } else if (kind === 'library') {
+        const b = building(L.x0, L.z0 + 1, Math.min(lw, 9), Math.min(ld, 8), { door: face, wall: B.STONEBRICK, corner: B.LOG, roof: B.ROOF_B, label: '📚 Perpustakaan' });
+        for (let x = b.x0 + 1; x <= b.x1 - 1; x++) for (const z of [b.z0 + 1, b.z1 - 1]) for (let y = GY + 1; y <= GY + 2; y++) if (G(x, y, z) === B.AIR && !(Math.abs(x - (b.x0 + b.x1) / 2) < 1 && z === (face === 'n' ? b.z0 + 1 : b.z1 - 1))) S(x, y, z, B.BOOKSHELF);
+        meta.pois.push({ x: cx + b.x + .5, z: cz + b.z + .5, r: 2, kind: 'library' });
+      } else if (kind === 'park') {
+        for (let x = L.x0; x <= L.x1; x++) for (let z = L.z0; z <= L.z1; z++) { if (x === ((L.x0 + L.x1) >> 1) || z === ((L.z0 + L.z1) >> 1)) S(x, GY, z, B.PATH); }
+        const px = L.x0 + 1, pz = L.z0 + 1; for (let x = px; x < px + 3; x++) for (let z = pz; z < pz + 3; z++) { S(x, GY, z, B.WATER); S(x, GY - 1, z, B.WATER); }
+        oak(L.x1 - 1, L.z0 + 1); oak(L.x1 - 1, L.z1 - 1); oak(L.x0 + 1, L.z1 - 1); yard(L, 10);
+        S((L.x0 + L.x1) >> 1, GY + 1, L.z0 + 2, B.PLANKS); S(((L.x0 + L.x1) >> 1) + 1, GY + 1, L.z0 + 2, B.PLANKS); post(L.x0 + 4, L.z0 + 4, 2);
+        sign('🌳 Taman Kota', (L.x0 + L.x1) / 2, GY + 3.2, (L.z0 + L.z1) / 2); meta.pois.push({ x: cx + (L.x0 + L.x1) / 2 + .5, z: cz + (L.z0 + L.z1) / 2 + .5, r: 3, kind: 'park' });
+        if (sx < 0) meta.npcSpots.lila = [cx + (L.x0 + L.x1) / 2 + .5, cz + (L.z0 + L.z1) / 2 + 1.5];
+      } else if (kind === 'arena') {
+        for (let x = L.x0; x <= L.x1; x++) for (let z = L.z0; z <= L.z1; z++) { const e = x === L.x0 || x === L.x1 || z === L.z0 || z === L.z1; S(x, GY, z, e ? B.COBBLE : B.SAND); if (e) S(x, GY + 1, z, B.COBBLE); }
+        const gx = sx > 0 ? L.x0 : L.x1; for (let z = ((L.z0 + L.z1) >> 1) - 1; z <= ((L.z0 + L.z1) >> 1) + 1; z++) S(gx, GY + 1, z, B.AIR);
+        for (const [a, b] of [[L.x0, L.z0], [L.x1, L.z0], [L.x0, L.z1], [L.x1, L.z1]]) post(a, b, 3);
+        const sx2 = sx > 0 ? L.x1 : L.x0; for (let z = L.z0 + 1; z < L.z1; z++) { S(sx2, GY + 2, z, B.STONEBRICK); }
+        sign('⚔ Arena Battle', (L.x0 + L.x1) / 2, GY + 4.5, (L.z0 + L.z1) / 2); meta.pois.push({ x: cx + (L.x0 + L.x1) / 2 + .5, z: cz + (L.z0 + L.z1) / 2 + .5, r: 3, kind: 'arena' }, { x: cx + (L.x0 + L.x1) / 2 + .5, z: cz + (L.z0 + L.z1) / 2 + .5, r: 3, kind: 'arena' });
+      } else if (kind === 'farm') {
+        for (let x = L.x0 + 1; x < L.x1; x++) for (let z = L.z0 + 1; z < L.z1; z++) { S(x, GY, z, (z - L.z0) % 3 === 0 ? B.WATER : B.DIRT); if ((z - L.z0) % 3 !== 0) S(x, GY + 1, z, (x + z) % 2 ? B.BERRYBUSH : B.HERB); }
+        for (let x = L.x0; x <= L.x1; x++) for (const z of [L.z0, L.z1]) if ((x + z) % 2 === 0) S(x, GY + 1, z, B.LOG);
+        S(L.x0 + 4, GY + 2, L.z0 + 4, B.WOOL_Y); S(L.x0 + 4, GY + 1, L.z0 + 4, B.LOG);
+        sign('🌾 Kebun Warga', (L.x0 + L.x1) / 2, GY + 3.4, L.z0 + .5); meta.pois.push({ x: cx + (L.x0 + L.x1) / 2 + .5, z: cz + L.z0 - .5, r: 2, kind: 'farm' });
+      } else if (kind === 'tower') {
+        const tx = (L.x0 + L.x1) >> 1, tz = (L.z0 + L.z1) >> 1;
+        for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) { for (let y = GY + 1; y <= GY + 11; y++) S(tx + a, y, tz + b, (Math.abs(a) === 2 || Math.abs(b) === 2) ? B.COBBLE : (y === GY + 11 ? B.PLANKS : B.AIR)); if ((Math.abs(a) === 2 || Math.abs(b) === 2) && (a + b) % 2 === 0) S(tx + a, GY + 12, tz + b, B.COBBLE); }
+        for (let y = GY + 3; y <= GY + 9; y += 3) for (const [a, b] of [[0, -2], [0, 2], [-2, 0], [2, 0]]) S(tx + a, y, tz + b, B.GLASS);
+        S(tx, GY + 1, tz + (sz > 0 ? -2 : 2), B.AIR); S(tx, GY + 2, tz + (sz > 0 ? -2 : 2), B.AIR); S(tx, GY + 12, tz, B.LANTERN);
+        sign('🛡 Menara Jaga', tx, GY + 13.4, tz);
+      } else if (kind === 'townhall') {
+        const b = building(L.x0, L.z0 + 1, 11, 9, { door: face, wall: B.STONEBRICK, corner: B.COBBLE, floors: 2, flat: true, tall: true, label: '🏛 Balai Kota', base: B.STONEBRICK });
+        const tx = (b.x0 + b.x1) >> 1, tz = (b.z0 + b.z1) >> 1;
+        for (let a = -1; a <= 1; a++) for (let c = -1; c <= 1; c++) for (let y = b.top + 1; y <= b.top + 8; y++) S(tx + a, y, tz + c, (a === 0 && c === 0 && y < b.top + 8) ? B.AIR : B.STONEBRICK);
+        for (const [a, c] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) S(tx + a, b.top + 6, tz + c, B.GLASS);
+        S(tx, b.top + 9, tz, B.LANTERN); for (const [a, c] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) S(tx + a, b.top + 9, tz + c, B.ROOF_B);
+        const colX = face === 'w' ? b.x0 - 2 : b.x1 + 2; for (const z of [b.z0 + 1, b.z1 - 1]) for (let y = GY + 1; y <= GY + 4; y++) S(colX, y, z, B.LOG);
+        for (let z = b.z0; z <= b.z1; z++) { S(colX, GY + 5, z, B.STONEBRICK); S(face === 'w' ? b.x0 - 1 : b.x1 + 1, GY + 5, z, B.STONEBRICK); }
+        for (let x = b.x0 + 1; x < b.x1; x++) S(x, GY + 1, b.z1 - 1, x % 2 ? B.BOOKSHELF : B.AIR);
+        meta.npcSpots.bram = [cx + b.x + (face === 'w' ? -1 : 1) + .5, cz + b.z + .5];
+      } else if (kind === 'market') {
+        const b = building(L.x0 + (sx > 0 ? 0 : 3), L.z0, 7, 6, { door: face, wall: B.BRICK, roof: B.ROOF, label: '🛒 Toko Pak Rudi' });
+        meta.npcSpots.rudi = [cx + b.x + .5, cz + b.z + .5];
+        for (let k = 0; k < 3; k++) {
+          const mx = L.x0 + 1 + k * 3, mz = L.z1 - 2;
+          for (const [a, c] of [[0, 0], [2, 0], [0, 2], [2, 2]]) { for (let y = 1; y <= 3; y++) S(mx + a, GY + y, mz + c - 1, B.LOG); }
+          for (let a = 0; a <= 2; a++) { S(mx + a, GY + 1, mz - 1, B.PLANKS); for (let c = -1; c <= 1; c++) S(mx + a, GY + 4, mz + c, (a + c) % 2 ? B.WOOL_R : B.WOOL); }
+          S(mx + 1, GY + 2, mz - 1, pk([B.BERRYBUSH, B.MUSHROOM, B.FLOWER_Y]));
+          meta.pois.push({ x: cx + mx + 1.5, z: cz + mz - 2.5 * sz * 0 - 2.2, r: 1.2, kind: 'market' });
+        }
+        sign('🧺 Pasar', L.x0 + 4.5, GY + 5.2, L.z1 - 1);
+      } else if (kind === 'clinic') {
+        const b = building(L.x0 + (sx > 0 ? 0 : 4), L.z0, 7, 6, { door: face, wall: B.WOOL, roof: B.ROOF, label: '🏥 Klinik Suster Mira' });
+        meta.npcSpots.mira = [cx + b.x + .5, cz + b.z + .5]; furnish(b);
+        const k = building(L.x0 + (sx > 0 ? 1 : 5), L.z1 - 4, 5, 5, { door: face, wall: B.COBBLE, roof: B.ROOF_G, label: '⚒ Bengkel' });
+        S((k.x0 + k.x1) >> 1, GY + 1, (k.z0 + k.z1) >> 1, B.TABLE); S(k.x0 + 1, GY + 1, k.z0 + 1, B.STORAGE);
+      } else if (kind === 'home') {
+        // ===== RUMAH KITA: 2 lantai, halaman, peti, kasur, meja crafting =====
+        const hx0 = L.x0 + 1, hw = 9, hd = 7, door = sz > 0 ? 'n' : 's', hz0 = door === 'n' ? L.z0 + 4 : L.z0;
+        const b = building(hx0, hz0, hw, hd, { door, wall: B.PLANKS, corner: B.LOG, roof: B.ROOF_B, floors: 2, base: B.STONEBRICK, pathLen: 1 });
+        // lantai 1: ruang keluarga
+        const ix0 = b.x0 + 1, ix1 = b.x1 - 1, iz0 = b.z0 + 1, iz1 = b.z1 - 1;
+        const front = door === 'n' ? iz0 : iz1, back = door === 'n' ? iz1 : iz0;
+        S(ix1, GY + 1, back, B.STORAGE); S(ix1 - 1, GY + 1, back, B.TABLE); S(ix1, GY + 1, front, B.BOOKSHELF); S(ix1, GY + 2, front, B.BOOKSHELF);
+        for (let x = ix0 + 2; x <= ix1 - 2; x++) for (let z = iz0 + 2; z <= iz1 - 2; z++) S(x, GY, z, (x + z) % 2 ? B.WOOL_B : B.WOOL);
+        // lantai 2: kamar tidur
+        const y2 = GY + 4; S(ix1, y2 + 1, back, B.BED); S(ix1 - 1, y2 + 1, back, B.BED); S(ix1, y2 + 1, front, B.BOOKSHELF); S(ix0 + 4, y2, front, B.WOOL_R); S(ix0 + 5, y2, front, B.WOOL_R);
+        S((ix0 + ix1) >> 1, y2 + 4, (iz0 + iz1) >> 1, B.LANTERN);
+        // halaman depan berpagar
+        const yz0 = door === 'n' ? L.z0 : b.z1 + 1, yz1 = door === 'n' ? b.z0 - 1 : L.z1;
+        for (let x = L.x0; x <= L.x1; x++) for (let z = yz0; z <= yz1; z++) {
+          const edge = x === L.x0 || x === L.x1 || z === (door === 'n' ? yz0 : yz1);
+          if (edge && Math.abs(x - (b.x0 + (hw >> 1))) > 1) S(x, GY + 1, z, (x + z) % 2 ? B.LOG : B.PLANKS);
+          else if (!edge && rng() < .18 && Math.abs(x - (b.x0 + (hw >> 1))) > 1) S(x, GY + 1, z, pk([B.FLOWER_R, B.FLOWER_Y, B.BERRYBUSH]));
+        }
+        for (let z = yz0; z <= yz1; z++) S(b.x0 + (hw >> 1), GY, z, B.PATH);
+        post(b.x0 + (hw >> 1) - 2, door === 'n' ? yz0 : yz1, 2); post(b.x0 + (hw >> 1) + 2, door === 'n' ? yz0 : yz1, 2);
+        meta.home = { chest: [cx + ix1, GY + 1, cz + back], bed: [cx + ix1, y2 + 1, cz + back], yard: [cx + L.x0 + 1, cz + Math.min(yz0, yz1) + 1, cx + L.x1 - 1, cz + Math.max(yz0, yz1) - 1], sign: [cx + b.x0 + (hw >> 1) + .5, GY + 4.4, cz + (door === 'n' ? b.z0 - .4 : b.z1 + 1.4)] };
+        meta.spawn = new THREE.Vector3(cx + b.x0 + (hw >> 1) + .5, GY + 1, cz + (door === 'n' ? b.z0 - 2 : b.z1 + 3) + .5);
+      }
+    }
+  }
+  // lentera jalan sepanjang jalan raya
+  for (const k of [-15, -12, 12, 15]) { if (Math.abs(k) === 12) { post(4, k, 3); post(k, -4, 3); } else { post(-4, k, 3); post(k, 4, 3); } }
+  for (const k of [-35, 35]) { post(4, k, 3); post(-4, k, 3); post(k, 4, 3); post(k, -4, 3); }
+  // NPC khusus
+  meta.npcSpots.tito = [cx + 5.5, cz - 3.5 + 7]; meta.npcSpots.garda = [cx + 5.5, cz + R - 4.5];
+  if (!meta.npcSpots.lila) meta.npcSpots.lila = [cx - 5.5, cz + 5.5];
+  if (!meta.npcSpots.sari) meta.npcSpots.sari = [cx - 10.5, cz - 10.5];
+  if (!meta.spawn) meta.spawn = new THREE.Vector3(cx + .5, GY + 1, cz + 9.5);
+  // jaringan jalan untuk para pemain kota (koordinat dunia)
+  const segs = [[3, -35, 3, 35], [-3, -35, -3, 35], [-35, 3, 35, 3], [-35, -3, 35, -3], [20, -20, 20, 20], [-20, -20, -20, 20], [-20, 20, 20, 20], [-20, -20, 20, -20], [22.5, -35, 22.5, 35], [-22.5, -35, -22.5, 35], [-35, 22.5, 35, 22.5], [-35, -22.5, 35, -22.5]];
+  meta.segs = segs.map(([a, b, c, d]) => [cx + a + .5, cz + b + .5, cx + c + .5, cz + d + .5]);
   return meta;
 }
 
@@ -2926,10 +3125,10 @@ class Player {
     this.hp = 0; const amt = LifeSystem.roll();
     const dead = LifeSystem.lose(amt, attacker ? `${attacker.name} mengalahkanmu` : 'HP-mu habis', attacker && attacker.isAI ? attacker : null);
     if (dead) return;
-    UI.toast('Kamu pingsan... dan terbangun di Desa Kubus.', 'bad', 4);
+    UI.toast('Kamu pingsan... dan terbangun di Kota Kubus.', 'bad', 4);
     this.respawn();
   }
-  respawn() { this.pos.copy(this.mode.meta.spawn); this.vel.set(0, 0, 0); this.hp = this.maxHp; this.invuln = 3; this.fallStart = null; UI.updateHud(); }
+  respawn() { const sp = Game.run.spawn; if (sp) this.pos.set(sp[0], sp[1], sp[2]); else this.pos.copy(this.mode.meta.spawn); this.vel.set(0, 0, 0); this.hp = this.maxHp; this.invuln = 3; this.fallStart = null; UI.updateHud(); }
   update(dt, inp, camYaw) {
     const w = this.world;
     this.invuln = Math.max(0, this.invuln - dt);
@@ -3135,7 +3334,7 @@ class RivalEnt {
   constructor(mode, pos) {
     this.mode = mode; this.type = 'rival'; this.isAI = true; this.stolen = 0; this.name = pick(RIVAL_NAMES);
     const col = pick(['#c0392b', '#8e44ad', '#2c3e50', '#d35400', '#16a085']);
-    const m = buildHumanoid({ skin: pick(['#e8b890', '#c99a6e', '#a87850']), hair: pick(['#111', '#ddd', '#8a2a2a']), shirt: col, pants: '#1a1a2a', cape: shade(col, .6), cap: '#111', capBrim: col });
+    this.look = { skin: pick(['#e8b890', '#c99a6e', '#a87850']), hair: pick(['#111', '#ddd', '#8a2a2a']), shirt: col, pants: '#1a1a2a', cape: shade(col, .6), cap: '#111', capBrim: col }; const m = buildHumanoid(this.look);
     this.model = m; this.group = m.group; this.height = 1.9; this.pos = pos.clone(); this.cool = 0;
     const avg = Math.max(...Game.party.map(c => c.level), 5), n = clamp(2 + Game.diffIndex - 2, 2, 4);
     const pool = Object.keys(SPECIES).filter(k => !SPECIES[k].rare && !SPECIES[k].starter);
@@ -3291,7 +3490,7 @@ const Quests = {
       AudioMgr.sfx('levelUp'); UI.toast(`✅ Tugas selesai: ${Q.s}! Hadiah: ${ITEMS[Q.reward[0]].name} ×${Q.reward[1]}`, 'gold', 4);
       Inventory.add(Q.reward[0], Q.reward[1], true); q.idx++;
     }
-    if (q.idx >= QUESTS.length && !q.done) { q.done = true; UI.bigText('SURVIVAL SELESAI!', '#7af08a', 'Temui Pak Bram di desa untuk membuka Tahap 3: Era Monster'); AudioMgr.sfx('secret'); }
+    if (q.idx >= QUESTS.length && !q.done) { q.done = true; UI.bigText('SURVIVAL SELESAI!', '#7af08a', 'Temui Pak Bram di Balai Kota untuk membuka Tahap 3: Era Monster'); AudioMgr.sfx('secret'); }
     this.render();
   },
   render() {
@@ -3299,7 +3498,7 @@ const Quests = {
     if (Game.state !== 'world' || !R || R.stage !== 2) { box.classList.add('hidden'); return; }
     const q = R.qp, Q = this.cur(); let html = `<div class="qh">📜 TAHAP 2 • SURVIVAL BLOK <span>${q.idx}/${QUESTS.length}</span></div>`;
     if (Q) { const [a, b] = Q.p(q); html += `<div class="qt">${Q.t}</div><div class="bar"><i class="xp" style="width:${Math.min(100, a / b * 100)}%"></i></div><div class="qn">${Math.min(a, b)} / ${b}</div>`; }
-    else html += `<div class="qt">💬 Temui <b>Pak Bram</b> di desa untuk memulai <b>Tahap 3: Era Monster</b>!</div>`;
+    else html += `<div class="qt">💬 Temui <b>Pak Bram</b> di Balai Kota untuk memulai <b>Tahap 3: Era Monster</b>!</div>`;
     html += `<button class="btn small dark" id="q-skip">${this.confirmSkip ? '⚠ Yakin? Klik lagi' : '⏭ Lewati ke Era Monster'}</button>`;
     if (box._h !== html) { box.innerHTML = html; box._h = html; $('q-skip').onclick = () => { AudioMgr.sfx('click'); if (!this.confirmSkip) { this.confirmSkip = true; this.render(); setTimeout(() => { this.confirmSkip = false; this.render(); }, 3000); return; } this.confirmSkip = false; UI.open('starter'); }; }
     box.classList.remove('hidden');
@@ -3377,13 +3576,81 @@ function makeSkyDome() {
   const m = new THREE.Mesh(new THREE.SphereGeometry(390, 32, 16), mat); m.renderOrder = -10; m.frustumCulled = false; return m;
 }
 
+
+/* --- PEMAIN KOTA: warga/pemain AI yang berjalan-jalan, mengobrol & membawa makhluk peliharaan --- */
+const CITY_NAMES = ['Raka_08', 'SitiGamer', 'BudiPro', 'Nadia.exe', 'Kevin77', 'AyuCraft', 'Dimas_Z', 'Putri.mp4', 'JokoMiner', 'LunaPock', 'AdiBlok', 'RinaKubus', 'FajarXD', 'Maya_07', 'Yoga.dev', 'Tari99', 'BimaKing', 'CitraLuv', 'Rizky.GG', 'Intan_Pro', 'Arif_Build', 'Dewi.Star', 'Gilang404', 'Salsa.sky', 'OmenBlok', 'NanaKawaii', 'Hendra_PK', 'Wulan.zz'];
+const CITY_CHAT = ['Ada yang mau tukar Pock Ball?', 'Baru dapat Voltbit shiny!! ✨', 'Udah nemu serangga hitam belum?', 'Mabar yuk ke Tanah Gelap!', 'Hati-hati serigala kalau malam', 'Rumahku dekat taman, mampir ya', 'Lagi farming kristal di gunung', 'Starter kalian level berapa?', 'Arena lagi rame nih!', 'Jual daging panggang murah~', 'AFK bentar, makan dulu', 'GG semuanya!', 'Ada yang lihat Eclipsar?', 'Tips: masak daging di meja crafting', 'Siapa mau battle? Aku siap!', 'Kota ini makin rame ya', 'Aku baru bikin rumah 3 lantai 😎', 'Salju di tundra cantik banget', 'Pasar buka sampai malam lho', 'Pak Rudi lagi diskon Pock Ball!', 'Aku nyasar ke gua, untung bawa obor', 'Kasur di rumah bikin bisa tidur sampai pagi', 'Fluffhop-ku hampir evolusi!', 'Ada yang mau bantu bangun menara?'];
+const CITY_TITLES = ['Penjelajah', 'Petambang', 'Pembangun', 'Trainer', 'Pedagang', 'Pemburu', 'Kolektor', 'Champion Muda'];
+function cityLook(i) {
+  const r = mulberry32(900 + i * 17), p = a => a[Math.floor(r() * a.length)];
+  return { skin: p(LOOK_OPTS.skin), hair: p(LOOK_OPTS.hair), hairStyle: p(Object.keys(HAIR_STYLES)), eyes: p(LOOK_OPTS.eyes), shirt: p(LOOK_OPTS.cloth), shirtStyle: p(['tee', 'hoodie', 'jacket', 'tee', 'dress', 'hoodie']), pants: p(LOOK_OPTS.pants), shoes: p(LOOK_OPTS.shoes), hat: p(['none', 'none', 'cap', 'beanie', 'wide', 'none']), hatCol: p(LOOK_OPTS.cloth), capBrim: p(LOOK_OPTS.cloth), glasses: p(['none', 'none', 'none', 'round', 'shades']), backpack: r() < .45 ? p(LOOK_OPTS.cloth) : null, lite: true, h: .86 + r() * .1 };
+}
+function segDist(p, s) { const [ax, az, bx, bz] = s, dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz; const t = clamp(((p.x - ax) * dx + (p.z - az) * dz) / L2, 0, 1); return { d: Math.hypot(ax + dx * t - p.x, az + dz * t - p.z), t }; }
+class CityPlayerEnt {
+  constructor(mode, i, pos, poi) {
+    this.mode = mode; this.type = 'citizen'; this.i = i; this.name = CITY_NAMES[i % CITY_NAMES.length]; this.look = cityLook(i % 14);
+    const m = buildHumanoid(this.look); this.model = m; this.group = m.group; this.height = m.height + .1;
+    this.pos = pos.clone(); this.poi = poi; this.dest = null; this.pause = rnd(0, 3); this.spd = rnd(1.4, 2.1); this.chatT = rnd(3, 18); this.bubbleT = 0; this.cool = 0; this.talkT = 0; this.t = rnd(0, 9);
+    const sps = ['fluffhop', 'flamecube', 'aquablock', 'leafling', 'voltbit', 'shadowbit', 'embird', 'crystalith', 'mossylox', 'darkpuff', 'rockmon', 'sandpincer'];
+    this.compSp = sps[i % sps.length]; this.level = 4 + ((i * 7) % 30);
+    if (i % 3 !== 2) { this.comp = new Creature3D(this.compSp); this.comp.baseScale *= .78; this.compPos = this.pos.clone().add(new THREE.Vector3(1, 0, 1)); this.comp.group.position.copy(this.compPos); mode.scene.add(this.comp.group); }
+    const male = !['dress'].includes(this.look.shirtStyle) && i % 2 === 0, styles = ['calm', 'bright', 'excited', 'merchant', 'firm', 'gentle'];
+    this.def = { id: 'cp' + i, name: this.name, role: `Pemain • ${CITY_TITLES[i % CITY_TITLES.length]} • Lv ${this.level}`, look: this.look, cityPlayer: true,
+      voice: { pitch: male ? 105 + (i * 13) % 60 : 200 + (i * 17) % 90, range: 3 + i % 4, speed: 4.5 + (i % 5) * .8, wave: i % 3 ? 'sawtooth' : 'triangle', formant: male ? .92 + (i % 3) * .04 : 1.08 + (i % 3) * .05, breath: .05, vib: [5, .008], style: styles[i % styles.length] },
+      lines: CITY_CHAT.slice(i % 6).concat(CITY_CHAT.slice(0, i % 6)).filter((_, k) => k % 3 === i % 3) };
+    this.group.position.copy(this.pos); mode.scene.add(this.group);
+  }
+  makeTeam() {
+    const lead = Game.party.find(c => !c.fainted) || Game.party[0], base = lead ? lead.level : 6, n = 1 + (this.i % 3);
+    const pool = ['fluffhop', 'flamecube', 'aquablock', 'leafling', 'voltbit', 'shadowbit', 'embird', 'crystalith', 'mossylox', 'darkpuff', 'rockmon', 'sandpincer'];
+    const team = []; for (let k = 0; k < n; k++) { let sp = k ? pool[(this.i * 5 + k * 3) % pool.length] : this.compSp; const lv = clamp(base + rndi(-2, 1), 3, 70); const e = SPECIES[sp].evo; if (e && e.lv && lv >= e.lv) sp = e.to; team.push(new CreatureInstance(sp, lv, { happy: 140 })); }
+    return team;
+  }
+  pickDest() {
+    const M = this.mode.meta;
+    if (this.poi) { for (let k = 0; k < 6; k++) { const a = rnd(0, TAU), r = rnd(0, this.poi.r), x = this.poi.x + Math.cos(a) * r, z = this.poi.z + Math.sin(a) * r; if (this.mode.world.groundY(x, z) === M.GY + 1) { this.dest = new THREE.Vector3(x, 0, z); return; } } this.dest = null; return; }
+    const near = M.segs.filter(s => segDist(this.pos, s).d < 2.5); const s = pick(near.length ? near : M.segs);
+    const end = chance(.5) ? [s[0], s[1]] : [s[2], s[3]]; const t = rnd(.15, 1); const st = segDist(this.pos, s);
+    const px = s[0] + (s[2] - s[0]) * st.t, pz = s[1] + (s[3] - s[1]) * st.t;
+    this.dest = new THREE.Vector3(lerp(px, end[0], t), 0, lerp(pz, end[1], t)); this.lane = (this.i % 2 ? .45 : -.45);
+  }
+  update(dt) {
+    const w = this.mode.world, pl = this.mode.player, P = this.model.P; this.t += dt; this.cool -= dt;
+    const toP = pl.pos.clone().sub(this.pos); toP.y = 0; let mv = 0;
+    if (this.talkT > 0) { this.talkT -= dt; this.group.rotation.y = Math.atan2(toP.x, toP.z); }
+    else if (this.pause > 0) this.pause -= dt;
+    else {
+      if (!this.dest) this.pickDest();
+      if (this.dest) {
+        const d = this.dest.clone().sub(this.pos); d.y = 0; const L = d.length();
+        if (L < .4) { this.dest = null; this.pause = chance(.35) ? rnd(2, 6) : rnd(0, .6); }
+        else { d.multiplyScalar(1 / L); const nx = this.pos.x + d.x * this.spd * dt, nz = this.pos.z + d.z * this.spd * dt; if (Math.abs(w.groundY(nx, nz) - w.groundY(this.pos.x, this.pos.z)) <= 1) { this.pos.x = nx; this.pos.z = nz; mv = 1; } else { this.dest = null; this.pause = .5; } let a = Math.atan2(d.x, d.z) - this.group.rotation.y; while (a > Math.PI) a -= TAU; while (a < -Math.PI) a += TAU; this.group.rotation.y += a * Math.min(1, dt * 8); }
+      }
+    }
+    this.pos.y = w.groundY(this.pos.x, this.pos.z); this.group.position.copy(this.pos);
+    const s = mv ? Math.sin(this.t * 9) * .6 : 0; P.legL.rotation.x = s; P.legR.rotation.x = -s; P.armL.rotation.x = -s * .8;
+    if (this.bubbleT > 0 && !mv) { P.armR.rotation.x = -.4 + Math.sin(this.t * 6) * .3; P.head.rotation.x = Math.sin(this.t * 12) * .05; } else P.armR.rotation.x = s * .8;
+    this.chatT -= dt; this.bubbleT -= dt;
+    if (this.chatT <= 0) { this.chatT = rnd(10, 28); if (toP.length() < 22) { this.bubble = pick(this.def.lines.length ? this.def.lines : CITY_CHAT); this.bubbleT = 4.5; this.pause = Math.max(this.pause, 2.5); } }
+    if (this.comp) {
+      const c = this.comp, back = new THREE.Vector3(-Math.sin(this.group.rotation.y) * 1.3 + Math.cos(this.group.rotation.y) * .7, 0, -Math.cos(this.group.rotation.y) * 1.3 - Math.sin(this.group.rotation.y) * .7);
+      const tgt = this.pos.clone().add(back), d = tgt.sub(this.compPos); d.y = 0; const L = d.length(); c.moving = 0;
+      if (L > .35) { d.normalize(); this.compPos.addScaledVector(d, Math.min(L, this.spd * 1.25 * dt)); c.moving = 1; c.group.rotation.y = Math.atan2(d.x, d.z); }
+      this.compPos.y = w.groundY(this.compPos.x, this.compPos.z); c.group.position.copy(this.compPos);
+      if (this.poi && this.poi.kind === 'arena' && !mv && Math.random() < dt * .4) c.play('attack');
+      c.update(dt);
+    }
+  }
+  setVisible(v) { this.group.visible = v; if (this.comp) this.comp.group.visible = v; }
+}
+
 /* ============================ WORLD MODE ============================ */
 class WorldMode {
   constructor(diff, seed, save) { this.diff = diff; this.seed = seed; this.save = save; this.edits = new Map(); this.busy = false; }
   async init(progress) {
     const S = this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(65, innerWidth / innerHeight, .1, 420);
-    const world = this.world = new VoxelWorld(144, 56, 144);
+    const world = this.world = new VoxelWorld(192, 56, 192);
     this.meta = await generateWorld(world, this.seed, progress);
     if (this.save && this.save.edits) { for (const [i, id] of this.save.edits) { world.data[i] = id; this.edits.set(i, id); } world.computeHeights(); }
     world.onSet = (x, y, z, id) => this.edits.set(world.idx(x, y, z), id);
@@ -3401,7 +3668,7 @@ class WorldMode {
     const sg = new THREE.BufferGeometry(), sp = []; for (let i = 0; i < 700; i++) { const v = new THREE.Vector3(rnd(-1, 1), rnd(.05, 1), rnd(-1, 1)).normalize().multiplyScalar(300); sp.push(v.x, v.y, v.z); }
     sg.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3)); this.stars = new THREE.Points(sg, new THREE.PointsMaterial({ color: 0xffffff, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0, fog: false })); S.add(this.stars);
     this.clouds = new THREE.Group(); const cm = new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: .85 });
-    for (let i = 0; i < 26; i++) { const c = new THREE.Group(); for (let k = 0; k < 4; k++) addBox(c, rnd(6, 14), 2, rnd(5, 10), cm, rnd(-6, 6), 0, rnd(-5, 5)); c.position.set(rnd(-30, 174), rnd(58, 66), rnd(-30, 174)); this.clouds.add(c); }
+    for (let i = 0; i < 36; i++) { const c = new THREE.Group(); for (let k = 0; k < 4; k++) addBox(c, rnd(6, 14), 2, rnd(5, 10), cm, rnd(-6, 6), 0, rnd(-5, 5)); c.position.set(rnd(-30, 222), rnd(58, 66), rnd(-30, 222)); this.clouds.add(c); }
     S.add(this.clouds);
     this.particles = new Particles(S, 900);
     // seleksi & retak
@@ -3414,6 +3681,11 @@ class WorldMode {
     const sv = this.save;
     if (sv && sv.player) { this.player.pos.set(...sv.player.pos); this.player.hp = sv.player.hp; } else this.player.pos.copy(this.meta.spawn);
     this.npcs = NPCS.map(d => { const s = this.meta.npcSpots[d.id]; return new NPCEnt(this, d, s[0], s[1]); });
+    // warga & pemain kota
+    this.citizens = [];
+    { const M = this.meta; for (let i = 0; i < 24; i++) { const poi = (i % 3 === 0 && M.pois.length) ? M.pois[(i / 3) % M.pois.length | 0] : null; let pos; if (poi) pos = new THREE.Vector3(poi.x, 0, poi.z); else { const sg = M.segs[i % M.segs.length], t = rnd(.1, .9); pos = new THREE.Vector3(lerp(sg[0], sg[2], t), 0, lerp(sg[1], sg[3], t)); } pos.y = world.groundY(pos.x, pos.z); this.citizens.push(new CityPlayerEnt(this, i, pos, poi)); } }
+    if (this.meta.home) { const sp = textSprite('🏠 Rumah ' + ((Game.look && Game.look.name) || 'Kita'), '#9fe0ff', 1.15); sp.position.set(...this.meta.home.sign); S.add(sp); }
+    this.pets = []; this._petKey = null;
     this.wilds = []; this.hostiles = []; this.rivals = []; this.chests = []; this.animals = []; this.ambT = 2;
     if (sv && sv.player && sv.player.hunger != null) this.player.hunger = sv.player.hunger;
     for (let k = 0; k < 30 && this.animals.length < 10; k++) this.spawnAnimals(true);
@@ -3421,7 +3693,7 @@ class WorldMode {
     this.bugs = this.meta.bugSpots.slice(0, this.diff.bugs).map((s, i) => found.includes(i) ? null : new BugEnt(this, s, i)).filter(Boolean);
     this.bugsFound = found.slice();
     if (sv && sv.chests) for (const [x, y, z] of sv.chests) this.chests.push(new ChestEnt(this, x, y, z));
-    this.cam = { yaw: 0, pitch: .42, dist: 7.5, target: this.player.pos.clone().setY(this.player.pos.y + 1.5) };
+    this.cam = { yaw: sv ? 0 : Math.PI, pitch: .42, dist: 7.5, target: this.player.pos.clone().setY(this.player.pos.y + 1.5) };
     this.timers = { spawn: 0, hostile: 3, rival: 90, needs: 0, minimap: 0, hud: 0, save: 60, animals: 2, quest: .5 };
     this.mine = { key: null, t: 0, tick: 0 };
     this.raycaster = new THREE.Raycaster();
@@ -3445,14 +3717,14 @@ class WorldMode {
     const dayC = new THREE.Color(0x9fd4ff), nightC = new THREE.Color(D.moon ? 0x1a0612 : 0x0a1030), dusk = new THREE.Color(0xff9a5a);
     const sky = nightC.clone().lerp(dayC, day); const duskK = Math.max(0, 1 - Math.abs(Math.sin(a)) * 3.5) * (day > .05 ? .7 : .3); sky.lerp(dusk, duskK);
     if (D.moon) sky.lerp(new THREE.Color(0x3a0a1a), .4);
-    const under = p.y < this.world.groundY(p.x, p.z) - 4; if (under) sky.multiplyScalar(.25);
+    const under = !this.inCity(p.x, p.z) && p.y < this.world.groundY(p.x, p.z) - 4; if (under) sky.multiplyScalar(.25);
     this.scene.background.copy(sky); this.scene.fog.color.copy(sky);
     { const U = this.sky.material.uniforms, top = new THREE.Color(D.moon ? 0x10030a : 0x020414).lerp(new THREE.Color(0x2f7fe0), day); if (D.moon) top.lerp(new THREE.Color(0x2a0614), .5); if (under) top.multiplyScalar(.25);
       U.top.value.copy(top); U.mid.value.copy(sky); U.bot.value.copy(sky).multiplyScalar(.7); U.sunDir.value.copy(sunDir.y > -.1 ? sunDir : sunDir.clone().negate()); U.sunCol.value.set(sunDir.y > -.1 ? (duskK > .3 ? 0xffa060 : 0xfff0c0) : (D.moon ? 0xff3050 : 0x8090c0)); U.glow.value = sunDir.y > -.1 ? 1 : .35; this.sky.position.copy(this.camera.position); }
     const vd = Settings.viewDist; this.scene.fog.near = (D.moon ? 18 : 38) * vd; this.scene.fog.far = (D.moon ? 70 : 115) * vd;
     this.stars.material.opacity = clamp(1 - day * 2, 0, 1); this.stars.position.copy(p);
     this.player.light.intensity = clamp((1 - day) * 1.3 + (under ? .9 : 0), 0, 1.4);
-    this.clouds.children.forEach(c => { c.position.x += dt * 1.2; if (c.position.x > 190) c.position.x = -40; });
+    this.clouds.children.forEach(c => { c.position.x += dt * 1.2; if (c.position.x > 240) c.position.x = -40; });
     Atlas.waterTex.offset.set(Game.time * .045, Game.time * .03);
     UI.setTime(t, night);
   }
@@ -3465,6 +3737,7 @@ class WorldMode {
       const a = rnd(0, TAU), r = rnd(16, 40), x = pl.x + Math.cos(a) * r, z = pl.z + Math.sin(a) * r;
       if (x < 4 || z < 4 || x > w.W - 4 || z > w.D - 4) continue;
       const gy = w.groundY(x, z); if (w.get(Math.floor(x), gy, Math.floor(z)) === B.WATER || gy < 4) continue;
+      if (this.inCity(x, z) && gy > this.meta.GY + 1) continue;
       const bio = this.biomeAt(x, z), table = SPAWNS[bio] || SPAWNS.plains, night = this.isNight;
       const opts = table.filter(([, , tm]) => tm === 'any' || (tm === 'night') === night).map(([s, wt]) => [s, wt]);
       if (!opts.length) continue;
@@ -3489,8 +3762,8 @@ class WorldMode {
     const cap = D.hostileCap * (night || inDark ? 1 : .5); if (this.hostiles.length >= cap) return;
     const a = rnd(0, TAU), r = rnd(20, 34), x = pl.x + Math.cos(a) * r, z = pl.z + Math.sin(a) * r;
     if (x < 4 || z < 4 || x > w.W - 4 || z > w.D - 4) return;
-    const dv = Math.hypot(x - this.meta.center.x, z - this.meta.center.z);
-    if (dv < 24 && (D.villageSafe || !night)) return;
+    if (this.inCity(x, z, 4) && (D.villageSafe || !night)) return;
+    if (this.inCity(x, z) && w.groundY(x, z) > this.meta.GY + 1) return;
     const kind = (D.moon || (inDark && night) || (D.id === 'hardmon' && night && chance(.4))) && chance(.55) ? 'moonwraith' : 'gloomling';
     this.hostiles.push(new HostileEnt(this, kind, new THREE.Vector3(x, w.groundY(x, z), z)));
   }
@@ -3507,14 +3780,14 @@ class WorldMode {
     const n = Math.max(1, rndi(1, D.herd || 1));
     for (let i = 0; i < n; i++) {
       const px = x + rnd(-2.5, 2.5), pz = z + rnd(-2.5, 2.5), gy = w.groundY(px, pz), wet = w.get(Math.floor(px), gy, Math.floor(pz)) === B.WATER;
-      if ((wet && !D.swim) || gy < 3) continue;
+      if ((wet && !D.swim) || gy < 3 || (this.inCity(px, pz) && gy > this.meta.GY + 1)) continue;
       this.animals.push(new AnimalEnt(this, kind, new THREE.Vector3(px, wet ? SEA - .2 : gy, pz)));
     }
   }
   /* --- partikel & suara suasana alam --- */
   ambient(dt) {
     const p = this.player.pos, w = this.world, bio = this.biomeAt(p.x, p.z), night = this.isNight, P = this.particles;
-    if (p.y < w.groundY(p.x, p.z) - 4) return;
+    if (!this.inCity(p.x, p.z) && p.y < w.groundY(p.x, p.z) - 4) return;
     const em = (rate, fn) => { let n = rate * dt; while (n > 0) { if (Math.random() < n) fn(); n -= 1; } };
     if (night && ['forest', 'swamp', 'plains', 'village', 'savanna'].includes(bio)) em(5, () => { const x = p.x + rnd(-11, 11), z = p.z + rnd(-11, 11); P.emit({ x, y: w.groundY(x, z) + rnd(.4, 2.6), z, vx: rnd(-.3, .3), vy: rnd(-.1, .2), vz: rnd(-.3, .3), life: rnd(2, 4), size: .06, color: pick(['#d8ff6a', '#f6ff9a']), glow: true, drag: 1, spin: 0, shrink: false }); });
     if (!night && (bio === 'forest' || bio === 'savanna')) em(2.5, () => P.emit({ x: p.x + rnd(-10, 10), y: p.y + rnd(5, 9), z: p.z + rnd(-10, 10), vx: rnd(.2, .6), vy: -.6, vz: rnd(-.2, .2), life: 6, size: .08, color: pick(['#5fa83a', '#8fc84a', '#c8b040']), grav: 0, drag: 1, spin: 3, shrink: false }));
@@ -3533,7 +3806,7 @@ class WorldMode {
     if (!this.diff.rivals || Game.run.stage < 3 || this.rivals.some(r => !r.dead)) return;
     const pl = this.player.pos, w = this.world; const a = rnd(0, TAU), x = pl.x + Math.cos(a) * 26, z = pl.z + Math.sin(a) * 26;
     if (x < 4 || z < 4 || x > w.W - 4 || z > w.D - 4) return;
-    if (Math.hypot(x - this.meta.center.x, z - this.meta.center.z) < 22) return;
+    if (this.inCity(x, z, 4)) return;
     const r = new RivalEnt(this, new THREE.Vector3(x, w.groundY(x, z), z)); this.rivals.push(r);
     UI.toast(`⚔ ${r.name} sedang memburumu! Mereka bisa mencuri nyawamu.`, 'bad', 4);
   }
@@ -3546,7 +3819,7 @@ class WorldMode {
   pickTarget(nx, ny) {
     const rc = this.raycaster; rc.setFromCamera({ x: nx, y: ny }, this.camera);
     const ray = rc.ray; let best = null, bd = 32;
-    const ents = [...this.wilds, ...this.hostiles, ...this.npcs, ...this.rivals, ...this.chests, ...this.animals];
+    const ents = [...this.wilds, ...this.hostiles, ...this.npcs, ...this.rivals, ...this.chests, ...this.animals, ...this.citizens, ...this.pets];
     const c = new THREE.Vector3(), hit = new THREE.Vector3();
     for (const e of ents) { if (e.dead || e.fainting) continue; c.copy(e.pos).setY(e.pos.y + e.height * .5); const r = Math.max(.55, e.height * .55); const s = new THREE.Sphere(c, r); if (ray.intersectSphere(s, hit)) { const d = hit.distanceTo(ray.origin); if (d < bd) { bd = d; best = { ent: e, d }; } } }
     const bh = this.world.raycast(ray.origin, ray.direction, 40);
@@ -3586,6 +3859,39 @@ class WorldMode {
     w.set(x, y, z, blk); AudioMgr.sfx('place'); this.player.swingT = .25; Game.stats.placed++; if (Game.run.qp) Game.run.qp.placed++;
   }
   /* --- interaksi klik entity --- */
+  inCity(x, z, m = 0) { const M = this.meta; return Math.max(Math.abs(x - M.center.x), Math.abs(z - M.center.z)) < M.half + m; }
+  /* --- blok yang bisa dipakai: kasur, peti, meja crafting --- */
+  useBlock(bh) {
+    if (!bh || !USABLE.has(bh.id)) return false;
+    if (bh.id === B.TABLE) { UI.open('crafting'); return true; }
+    if (bh.id === B.STORAGE) { AudioMgr.sfx('chestOpen'); UI.open('chest'); return true; }
+    this.sleep(bh); return true;
+  }
+  async sleep(bh) {
+    const p = this.player; Game.run.spawn = [p.pos.x, p.pos.y + .05, p.pos.z];
+    if (!this.isNight) { UI.toast('🛏 Titik bangun disimpan di sini. Kamu bisa tidur saat malam hari.', 'info', 3.5); AudioMgr.sfx('click'); return; }
+    if (this.hostiles.some(h => !h.dead && h.pos.distanceTo(p.pos) < 18) || this.animals.some(a => !a.dead && a.aggro > 0 && a.pos.distanceTo(p.pos) < 18)) { UI.toast('Tidak bisa tidur — ada bahaya di dekatmu!', 'bad', 3); AudioMgr.sfx('error'); return; }
+    this.busy = true; AudioMgr.sfx('sleep'); await UI.fade(true, .9);
+    Game.run.time = .02; p.hp = p.maxHp; p.hunger = Math.max(0, p.hunger - 3); for (const c of Game.party) c.energy = Math.min(100, c.energy + 40);
+    for (const h of this.hostiles) h.remove(); this.hostiles = [];
+    await wait(.4); UI.fade(false, 1); this.busy = false; Game.updateMusic(true);
+    UI.bigText('SELAMAT PAGI!', '#ffd27a', 'Kamu tidur nyenyak. HP pulih & titik bangun disimpan.'); AudioMgr.sfx('heal'); Game.saveRun(true);
+  }
+  /* --- makhluk simpanan bermain di halaman Rumah Kita --- */
+  updatePets(dt) {
+    const H = this.meta.home; if (!H) return; const [x0, z0, x1, z1] = H.yard, w = this.world;
+    const list = Game.storage.slice(0, 4), key = list.map(c => c.uid + c.sp).join(',');
+    if (key !== this._petKey) {
+      this._petKey = key; for (const p of this.pets) this.scene.remove(p.group);
+      this.pets = list.map(inst => { const m = new Creature3D(inst.sp, inst.shiny), pos = new THREE.Vector3(rnd(x0, x1 + 1), 0, rnd(z0, z1 + 1)); pos.y = w.groundY(pos.x, pos.z); m.group.position.copy(pos); this.scene.add(m.group); return { type: 'pet', inst, model: m, group: m.group, pos, height: m.height, name: inst.name, target: null, idle: rnd(1, 4) }; });
+    }
+    for (const p of this.pets) {
+      p.model.moving = 0;
+      if (!p.target) { p.idle -= dt; if (p.idle <= 0) { p.target = new THREE.Vector3(rnd(x0, x1 + 1), 0, rnd(z0, z1 + 1)); p.idle = rnd(2, 6); } }
+      else { const d = p.target.clone().sub(p.pos); d.y = 0; const L = d.length(); if (L < .3) { p.target = null; if (chance(.3)) p.model.play('happy'); } else { d.normalize(); const nx = p.pos.x + d.x * dt, nz = p.pos.z + d.z * dt; if (Math.abs(w.groundY(nx, nz) - w.groundY(p.pos.x, p.pos.z)) <= 1) { p.pos.x = nx; p.pos.z = nz; p.model.moving = 1; } else p.target = null; p.group.rotation.y = Math.atan2(d.x, d.z); } }
+      p.pos.y = w.groundY(p.pos.x, p.pos.z); p.group.position.copy(p.pos); p.model.update(dt);
+    }
+  }
   attack(ent) {
     const pl = this.player; const d = ent.pos.distanceTo(pl.pos); if (d > 4.2) { UI.toast('Terlalu jauh untuk menyerang.', 'info', 1.2); return; }
     pl.swingT = .3; AudioMgr.sfx('swing'); pl.yaw = Math.atan2(ent.pos.x - pl.pos.x, ent.pos.z - pl.pos.z);
@@ -3595,7 +3901,8 @@ class WorldMode {
   }
   interact(ent) {
     if (!ent) return;
-    if (ent.type === 'npc') { if (ent.pos.distanceTo(this.player.pos) > 5) { UI.toast('Dekati dulu untuk bicara.', 'info', 1.2); return; } ent.talkT = 3; UI.npcDialog(ent); }
+    if (ent.type === 'pet') { UI.selCreature = ent.inst.uid; UI.open('creatures'); return; }
+    if (ent.type === 'npc' || ent.type === 'citizen') { if (ent.pos.distanceTo(this.player.pos) > 5) { UI.toast('Dekati dulu untuk bicara.', 'info', 1.2); return; } ent.talkT = 3; UI.npcDialog(ent); }
     else if (ent.type === 'chest') { if (ent.pos.distanceTo(this.player.pos) < 4) ent.open(); }
     else if (ent.type === 'wild') { if (ent.pos.distanceTo(this.player.pos) > 11) { UI.toast('Terlalu jauh untuk memulai battle.', 'info', 1.2); return; } if (!Game.party.some(c => !c.fainted)) { UI.toast('Semua makhlukmu pingsan! Sembuhkan di Klinik atau pakai Revive.', 'bad', 3); return; } Game.startBattle({ kind: 'wild', wild: ent }); }
     else if (ent.type === 'rival') { if (Game.party.some(c => !c.fainted)) this.challenge(ent); }
@@ -3653,8 +3960,10 @@ class WorldMode {
     if (!paused) {
       for (const e of this.wilds) e.update(dt); for (const e of this.hostiles) if (!e.dead) e.update(dt); for (const e of this.rivals) if (!e.dead) e.update(dt);
       for (const e of this.npcs) e.update(dt); for (const b of this.bugs) if (!b.dead) b.update(dt); for (const c of this.chests) if (!c.dead) c.update(dt); for (const a of this.animals) if (!a.dead) a.update(dt);
+      for (const c of this.citizens) c.update(dt); this.updatePets(dt);
       this.ambient(dt);
-      { const cp = this.camera.position; for (const e of this.wilds) if (!e.dead) e.group.visible = e.pos.distanceTo(cp) < 58; for (const a of this.animals) if (!a.dead) a.group.visible = a.pos.distanceTo(cp) < 58; }
+      if ((this._cullT = (this._cullT || 0) - dt) <= 0) { this._cullT = .4; const cp = this.camera.position, far = this.scene.fog.far + 26; for (const k in this.world.chunks) { const [a, b] = k.split(',').map(Number), vis = Math.hypot(a * CH + 8 - cp.x, b * CH + 8 - cp.z) < far; for (const m of this.world.chunks[k]) m.visible = vis; } }
+      { const cp = this.camera.position; for (const e of this.wilds) if (!e.dead) e.group.visible = e.pos.distanceTo(cp) < 58; for (const a of this.animals) if (!a.dead) a.group.visible = a.pos.distanceTo(cp) < 58; for (const c of this.citizens) c.setVisible(c.pos.distanceTo(cp) < 50); for (const p of this.pets) p.group.visible = p.pos.distanceTo(cp) < 50; }
       const T = this.timers;
       if ((T.spawn -= dt) <= 0) { T.spawn = 1.2; this.spawnWild(); }
       if ((T.animals -= dt) <= 0) { T.animals = 2; this.spawnAnimals(); }
@@ -3670,6 +3979,8 @@ class WorldMode {
     // label
     Labels.begin(); const cam = this.camera, ppos = pl.pos;
     for (const e of this.wilds) { if (e.dead || e.pos.distanceTo(ppos) > 22) continue; const k = e.inst.hp / e.inst.maxHp; Labels.add(e.pos.clone().setY(e.pos.y + e.height + .35), `${e.isBoss ? '👑 ' : ''}${e.inst.shiny ? '✨' : ''}${e.inst.name} <span style="color:#ffcf3f">Lv${e.inst.level}</span><div class="bar"><i class="hp ${k < .25 ? 'low' : k < .5 ? 'mid' : ''}" style="width:${k * 100}%"></i></div>`, '', cam); }
+    for (const c of this.citizens) { if (c.pos.distanceTo(ppos) > 16) continue; Labels.add(c.pos.clone().setY(c.pos.y + c.height + .2), `${c.bubbleT > 0 ? `<div class="bubble">${c.bubble}</div>` : ''}<span style="color:#9fe0ff">${c.name}</span>`, 'npc', cam); }
+    for (const p of this.pets) { if (p.pos.distanceTo(ppos) > 14) continue; Labels.add(p.pos.clone().setY(p.pos.y + p.height + .2), `🏠 ${p.name}`, 'npc', cam); }
     for (const a of this.animals) { if (a.dead || a.dying || a.pos.distanceTo(ppos) > 14) continue; const k = a.hp / a.maxHp; Labels.add(a.pos.clone().setY(a.pos.y + a.height + .2), `${a.name}${a.def.hostileNight && this.isNight ? ' 😠' : ''}<div class="bar"><i class="hp ${k < .25 ? 'low' : k < .5 ? 'mid' : ''}" style="width:${k * 100}%"></i></div>`, a.aggro > 0 ? 'hostile' : '', cam); }
     for (const e of this.hostiles) { if (e.dead || e.pos.distanceTo(ppos) > 26) continue; Labels.add(e.pos.clone().setY(e.pos.y + e.height + .3), `💀 ${e.name}${e.stolen > 0 ? `<div class="steal">❤ ×${e.stolen} nyawa curian</div>` : ''}<div class="bar"><i class="hp low" style="width:${e.hp / e.maxHp * 100}%"></i></div>`, 'hostile', cam); }
     for (const e of this.rivals) { if (e.dead || e.pos.distanceTo(ppos) > 30) continue; Labels.add(e.pos.clone().setY(e.pos.y + 2.3), `⚔ ${e.name}${e.stolen > 0 ? `<div class="steal">❤ ×${e.stolen} nyawa curian</div>` : ''}`, 'hostile', cam); }
@@ -3710,7 +4021,7 @@ const Battle = {
   buildArena(biome, under) {
     if (this.arena) { this.scene.remove(this.arena.group); this.arena.group.traverse(o => o.geometry && o.geometry.dispose()); }
     const w = new VoxelWorld(28, 10, 28), N = new Noise(rndi(1, 9999));
-    const tops = { plains: B.GRASS, village: B.GRASS, forest: B.GRASS, desert: B.SAND, beach: B.SAND, mountain: B.SNOWGRASS, swamp: B.SWAMPGRASS, dark: B.DARKGRASS };
+    const tops = { plains: B.GRASS, village: B.STONEBRICK, forest: B.GRASS, desert: B.SAND, beach: B.SAND, mountain: B.SNOWGRASS, swamp: B.SWAMPGRASS, dark: B.DARKGRASS };
     const top = under ? B.STONE : tops[biome] || B.GRASS, sub = under ? B.STONE : (top === B.SAND ? B.SANDSTONE : B.DIRT);
     for (let z = 0; z < 28; z++) for (let x = 0; x < 28; x++) {
       const d = Math.hypot(x - 14, z - 14); if (d > 13.5) continue;
@@ -3722,6 +4033,7 @@ const Battle = {
     const deco = (x, z) => { const h = w.heights[x + z * 28] + 1; const r = Math.random();
       if (under) { if (r < .5) { for (let i = 0; i < rndi(1, 3); i++) w.setRaw(x, h + i, z, pick([B.CRYSTAL, B.STONE, B.COAL])); } return; }
       if (biome === 'desert') { if (r < .5) for (let i = 0; i < rndi(2, 3); i++) w.setRaw(x, h + i, z, B.CACTUS); return; }
+      if (biome === 'village') { if (r < .35) { w.setRaw(x, h, z, B.LOG); w.setRaw(x, h + 1, z, B.LOG); w.setRaw(x, h + 2, z, B.LANTERN); } else if (r < .55) { for (let i = 0; i < 3; i++) w.setRaw(x, h + i, z, i === 2 ? B.ROOF_B : B.BRICK); } else w.setRaw(x, h, z, pick([B.FLOWER_R, B.FLOWER_Y])); return; }
       if (biome === 'dark') { if (r < .4) for (let i = 0; i < rndi(1, 3); i++) w.setRaw(x, h + i, z, B.MOONCRYSTAL); else if (r < .7) w.setRaw(x, h, z, B.MUSHROOM); return; }
       if (biome === 'mountain') { if (r < .4) { w.setRaw(x, h, z, B.STONE); w.setRaw(x, h + 1, z, B.SNOW); } else if (r < .6) w.setRaw(x, h, z, B.CRYSTAL); return; }
       if (r < .3) { const th = 4; for (let i = 0; i < th; i++) w.setRaw(x, h + i, z, B.LOG); for (let a = -2; a <= 2; a++) for (let b = -2; b <= 2; b++) for (let c = 3; c <= 5; c++) if (!w.get(x + a, h + c, z + b) && Math.abs(a) + Math.abs(b) < 4) w.setRaw(x + a, h + c, z + b, biome === 'swamp' ? B.LEAVES : B.LEAVES); }
@@ -3737,7 +4049,7 @@ const Battle = {
   async start(opts) {
     this.opts = opts; this.active = true; this.over = false; this.result = null; this.runTries = 0; this.turnN = 0;
     const wm = Game.world, pp = wm.player.pos;
-    this.biome = wm.biomeAt(pp.x, pp.z); this.under = pp.y < wm.world.groundY(pp.x, pp.z) - 4;
+    this.biome = wm.biomeAt(pp.x, pp.z); this.under = !wm.inCity(pp.x, pp.z) && pp.y < wm.world.groundY(pp.x, pp.z) - 4;
     this.buildArena(this.biome, this.under);
     this.scene.background.copy(wm.scene.background); this.scene.fog.color.copy(wm.scene.background);
     const nightK = wm.isNight ? .55 : 1; this.hemi.intensity = .75 * nightK + (this.under ? .1 : 0); this.dir.intensity = .85 * nightK;
@@ -3754,7 +4066,7 @@ const Battle = {
     this.trainerP = buildHumanoid(playerLook());
     this.trainerP.group.position.set(-5.6, 0, 2.4); this.trainerP.group.lookAt(2.6, 0, -1.8); this.scene.add(this.trainerP.group);
     if (this.trainerE) { this.scene.remove(this.trainerE.group); this.trainerE = null; }
-    if (opts.kind === 'trainer') { const rm = opts.trainer.model; const look = buildHumanoid({ skin: '#c99a6e', shirt: '#8e44ad', pants: '#1a1a2a', cape: '#4a1a5a', cap: '#111' }); this.trainerE = look; look.group.position.set(4.5, 0, -4.4); look.group.lookAt(-2.6, 0, 1.8); this.scene.add(look.group); }
+    if (opts.kind === 'trainer') { const rm = opts.trainer.model; const look = buildHumanoid(opts.trainer.look || { skin: '#c99a6e', shirt: '#8e44ad', pants: '#1a1a2a', cape: '#4a1a5a', cap: '#111' }); this.trainerE = look; look.group.position.set(4.5, 0, -4.4); look.group.lookAt(-2.6, 0, 1.8); this.scene.add(look.group); }
     this.clearModels();
     this.E.model = new Creature3D(this.E.inst.sp, this.E.inst.shiny); this.placeModel(this.E); this.E.model.group.visible = false;
     UI.showBattle(true); UI.battleLogClear(); UI.battleSub(null); UI.battleActions(false);
@@ -3764,7 +4076,7 @@ const Battle = {
     this.E.model.group.visible = true; this.E.model.play('appear'); AudioMgr.cry(this.E.inst.S.cry, 'appear');
     if (this.E.inst.shiny) { AudioMgr.sfx('shine'); this.particles.burst(this.E.pos.clone().setY(1), { n: 40, color: ['#fff6a0', '#ffffff'], glow: true, speed: 3, grav: 0, size: .1 }); }
     UI.renderBattleCards();
-    const intro = opts.kind === 'wild' ? (this.E.inst.S.boss ? `⚠ BOSS ${this.E.inst.name} Lv${this.E.inst.level} menghadangmu!` : `${this.E.inst.shiny ? '✨ ' : ''}Seekor ${this.E.inst.name} liar (Lv${this.E.inst.level}) muncul!`) : `${opts.trainer.name} menantangmu bertarung!`;
+    const intro = opts.kind === 'wild' ? (this.E.inst.S.boss ? `⚠ BOSS ${this.E.inst.name} Lv${this.E.inst.level} menghadangmu!` : `${this.E.inst.shiny ? '✨ ' : ''}Seekor ${this.E.inst.name} liar (Lv${this.E.inst.level}) muncul!`) : `${opts.trainer.name} ${opts.friendly ? 'mengajak battle persahabatan!' : 'menantangmu bertarung!'}`;
     this.camTo(new THREE.Vector3(5.5, 2.2, 1.5), this.E.pos.clone().setY(.9), 1.4);
     await this.say(intro, 'info');
     if (opts.kind === 'trainer') await this.say(`${opts.trainer.name} mengirim ${this.E.inst.name}!`);
@@ -4102,7 +4414,7 @@ const Battle = {
       Inventory.coins += coins; AudioMgr.sfx('coins');
       await this.say(`Kamu menang! +${coins} koin`, 'gold');
       if (chance(o.kind === 'trainer' ? 1 : .45)) { Inventory.add('essence', o.kind === 'trainer' ? 2 : 1, true); await this.say(`Mendapat Esensi Elemen!`, 'good'); }
-      if (o.kind === 'trainer') { Inventory.add(pick(['greatball', 'superpotion', 'revive', 'elixir']), 1, true); await this.say(`${o.trainer.name}: "Hmph... kali ini kau menang."`); }
+      if (o.kind === 'trainer') { Inventory.add(pick(['greatball', 'superpotion', 'revive', 'elixir']), 1, true); await this.say(o.friendly ? `${o.trainer.name}: "GG! Kamu hebat banget!"` : `${o.trainer.name}: "Hmph... kali ini kau menang."`); }
       if (this.E.inst.S.boss) { Inventory.add('moon_shard', 3, true); Inventory.add('evo_stone', 1, true); await this.say('Eclipsar meninggalkan Pecahan Bulan & Evolution Stone!', 'gold'); }
       for (const c of Game.party) if (this.participants.has(c.uid) && !c.fainted) { c.happy = Math.min(255, c.happy + 3); c.energy = Math.max(0, c.energy - 6); c.hunger = Math.max(0, c.hunger - 4); }
     } else if (res === 'lose') {
@@ -4215,7 +4527,7 @@ const UI = {
     $('hp-fill').style.width = (k * 100) + '%'; $('hp-num').textContent = Math.ceil(p.hp) + '/' + p.maxHp;
     $('coins').textContent = '💰 ' + Inventory.coins; $('coords').textContent = `${Math.floor(p.pos.x)}, ${Math.floor(p.pos.y)}, ${Math.floor(p.pos.z)}`;
     const D = Game.diff; $('hud-diff').textContent = D.name.toUpperCase(); $('hud-diff').style.color = D.color;
-    const w = Game.world, under = p.pos.y < w.world.groundY(p.pos.x, p.pos.z) - 4;
+    const w = Game.world, under = !w.inCity(p.pos.x, p.pos.z) && p.pos.y < w.world.groundY(p.pos.x, p.pos.z) - 4;
     $('hud-biome').textContent = under ? BIOME_NAMES.cave : BIOME_NAMES[w.biomeAt(p.pos.x, p.pos.z)] || '';
     { const hb = $('hunger'); const n = Math.round(p.hunger); if (hb._n !== n) { hb._n = n; hb.innerHTML = ''; for (let i = 0; i < 10; i++) { const v = n - i * 2, h = el('i', 'heart'); h.style.backgroundImage = v >= 2 ? HEARTS.food : v >= 1 ? HEARTS.foodHalf : HEARTS.foodEmpty; hb.appendChild(h); } $('hunger-num').textContent = `KENYANG ${n}/20${n <= 6 ? ' • LAPAR!' : ''}`; } }
     $('armor-ind').innerHTML = Inventory.armor ? `${ITEMS[Inventory.armor].emo} ${ITEMS[Inventory.armor].name}${Inventory.armor === 'gogil_armor' ? ' — <span style="color:#d6b6ff">Aura Gogil aktif</span>' : ''}` : '';
@@ -4246,11 +4558,14 @@ const UI = {
       else if (e.type === 'npc') html = `<div class="tn" style="color:#ffe59a">${e.name}</div><div class="keys">${e.def.role} • Klik / F: Bicara</div>`;
       else if (e.type === 'rival') html = `<div class="tn" style="color:#ff8a94">⚔ ${e.name}</div><div class="keys">Rival trainer • F: Bertarung ${e.stolen ? `• ❤×${e.stolen} curian` : ''}</div>`;
       else if (e.type === 'chest') html = `<div class="tn" style="color:#ffcf3f">✦ Chest Rahasia</div><div class="keys">Klik / F: Buka</div>`;
-      if (ti._h !== html) { ti.innerHTML = html; ti._h = html; } ti.classList.remove('hidden');
+      else if (e.type === 'animal') { const k = e.hp / e.maxHp; html = `<div class="tn">${e.name}${e.def.hostileNight && mode.isNight ? ' 😠' : ''}</div><div class="bar"><i class="hp ${k < .25 ? 'low' : k < .5 ? 'mid' : ''}" style="width:${k * 100}%"></i></div><div class="keys">Hewan • Klik: berburu${e.def.retaliate ? ' (bisa melawan!)' : ''}</div>`; }
+      else if (e.type === 'citizen') html = `<div class="tn" style="color:#9fe0ff">${e.name}</div><div class="keys">${e.def.role} • Klik / F: Ngobrol</div>`;
+      else if (e.type === 'pet') html = `<div class="tn" style="color:#9fe0ff">🏠 ${e.name} Lv${e.inst.level}</div><div class="keys">Makhluk simpananmu • Klik: rawat</div>`;
+      if (!html) ti.classList.add('hidden'); else { if (ti._h !== html) { ti.innerHTML = html; ti._h = html; } ti.classList.remove('hidden'); }
     } else ti.classList.add('hidden');
     const ih = $('interact-hint'); let hint = '';
     const ch = mode.nearestOf(mode.chests, 3.2);
-    if (nn && nn.pos.distanceTo(mode.player.pos) < 3.2) hint = `<b>[F]</b> Bicara dengan ${nn.name}`; else if (ch && !ch.opened) hint = '<b>[F]</b> Buka Chest Rahasia'; else if (mode.nearTableCache) hint = '⚒ Dekat Meja Crafting — tekan <b>C</b>';
+    if (nn && nn.pos.distanceTo(mode.player.pos) < 3.2) hint = `<b>[F]</b> Bicara dengan ${nn.name}`; else if (ch && !ch.opened) hint = '<b>[F]</b> Buka Chest Rahasia'; else if (h && h.block && h.reach <= 6 && USABLE.has(h.block.id)) hint = h.block.id === B.BED ? '🛏 <b>[Klik kanan / F]</b> Tidur & simpan titik bangun' : h.block.id === B.STORAGE ? '📦 <b>[Klik kanan / F]</b> Buka Peti Penyimpanan' : '⚒ <b>[Klik kanan / F]</b> Buka Crafting'; else if (mode.nearestOf(mode.citizens, 3.2)) hint = `<b>[F]</b> Ngobrol dengan ${mode.nearestOf(mode.citizens, 3.2).name}`; else if (mode.nearTableCache) hint = '⚒ Dekat Meja Crafting — tekan <b>C</b>';
     if (!this.blocking() && hint) { if (ih._h !== hint) { ih.innerHTML = hint; ih._h = hint; } ih.classList.remove('hidden'); } else ih.classList.add('hidden');
   },
   drawMinimap(mode) {
@@ -4273,6 +4588,8 @@ const UI = {
     for (const e of mode.hostiles) if (!e.dead) dot(e.pos.x, e.pos.z, '#ff3040', 2.5);
     for (const e of mode.rivals) if (!e.dead) dot(e.pos.x, e.pos.z, '#ff9a2e', 3);
     for (const e of mode.chests) if (!e.dead) dot(e.pos.x, e.pos.z, '#ffcf3f', 3);
+    for (const e of mode.citizens) dot(e.pos.x, e.pos.z, '#9fe0ff', 1.4);
+    if (mode.meta.home) { const Hh = mode.meta.home; dot(Hh.chest[0], Hh.chest[2], '#3fa0ff', 3.2); }
     for (const e of mode.animals) if (!e.dead) dot(e.pos.x, e.pos.z, e.def.hostileNight || e.def.retaliate ? '#c86a3a' : '#e8d0a0', 1.6);
     if (Game.run.stage === 2 && Game.run.qp && Game.run.qp.done) { const b = mode.npcs.find(n => n.def.id === 'bram'); if (b && Math.floor(Game.time * 3) % 2) dot(b.pos.x, b.pos.z, '#7af08a', 4); }
     // panah pemain
@@ -4296,6 +4613,10 @@ const UI = {
     if (d.id === 'bram') add('📜 Tips', '', () => this.npcDialog(ent, pick(['Lemahkan makhluk sampai HP-nya di bawah 40 persen, lalu lempar Pock Ball. Status tidur atau beku membuatnya lebih mudah ditangkap.', 'Makhluk yang lapar dan lelah bisa menolak perintahmu. Beri makan dan istirahat di menu Makhluk.', 'Meja crafting bisa membuat Evolution Stone dari kristal, emas, dan esensi elemen.', 'Gua di pegunungan menyimpan kristal dan emas. Bawa beliung besi!'])));
     if (d.id === 'garda') add('⚠ Info Bahaya', 'red', () => this.npcDialog(ent, `Mode ${Game.diff.name}. ${Game.diff.desc}`));
     if (d.id === 'lila') add('🎀 Main bersama', 'purple', () => { const k = 'lila'; if ((Game.cool[k] || 0) > Game.time) return this.npcDialog(ent, 'Aduh, aku capek main. Nanti lagi ya!'); Game.cool[k] = Game.time + 120; Game.party.forEach(c => c.happy = Math.min(255, c.happy + 6)); AudioMgr.sfx('play'); this.npcDialog(ent, 'Yeay! Seru banget! Makhlukmu kelihatan jauh lebih bahagia sekarang!'); this.toast('Happiness seluruh tim +6', 'good'); });
+    if (d.cityPlayer) {
+      add('⚔ Battle persahabatan', 'red', () => { if (Game.run.stage < 3 || !Game.party.some(c => !c.fainted)) return this.npcDialog(ent, 'Kamu belum punya makhluk yang siap bertarung. Nanti kita battle ya!'); if (ent.cool > 0) return this.npcDialog(ent, 'Makhlukku masih istirahat, nanti lagi ya!'); this.closeDialog(); ent.cool = 90; Game.startBattle({ kind: 'trainer', trainer: ent, team: ent.makeTeam(), friendly: true }); });
+      add('👋 Sapa', '', () => { AudioMgr.sfx('play'); ent.bubble = '👋 Halo, ' + ((Game.look && Game.look.name) || 'teman') + '!'; ent.bubbleT = 3; this.npcDialog(ent, pick(['Senang ketemu kamu! Main ke rumahku kapan-kapan ya.', 'Rumahmu yang atap biru dekat alun-alun itu ya? Keren!', 'Semoga beruntung di petualanganmu!', 'Kalau malam, tidur di kasur biar aman dari monster.'])); });
+    }
     if (d.id === 'tito') add('🎁 Ada hadiah?', '', () => { const k = 'tito'; if ((Game.cool[k] || 0) > Game.time) return this.npcDialog(ent, 'Belum nemu apa-apa lagi, Kak. Nanti ya!'); Game.cool[k] = Game.time + 180; const it = pick(['berry', 'herb', 'pockball', 'crystal_shard', 'coal']); Inventory.add(it, it === 'pockball' ? 2 : 3); this.npcDialog(ent, `Aku nemu ${ITEMS[it].name} di dekat sungai! Buat kakak aja!`); });
     add('💬 Bicara lagi', 'dark', () => this.npcDialog(ent));
     add('✕ Tutup', 'dark', () => this.closeDialog());
@@ -4323,11 +4644,11 @@ const UI = {
     if (Game.state !== 'world' && Game.state !== 'room' && Game.state !== 'title') return;
     if (this.dialogOpen) this.closeDialog();
     this.modalKind = kind; $('modal').classList.remove('hidden'); AudioMgr.sfx('open');
-    const T = { starter: '🐾 TAHAP 3 • Pilih Makhluk Pertamamu', inventory: '🎒 Tas & Inventory', crafting: '⚒ Crafting', creatures: '🐾 My Creatures', shop: '🛒 Toko Pak Rudi', settings: '⚙ Pengaturan', pause: '☰ Menu Pause', help: '❔ Cara Bermain' };
+    const T = { chest: '📦 Peti Penyimpanan Rumah', starter: '🐾 TAHAP 3 • Pilih Makhluk Pertamamu', inventory: '🎒 Tas & Inventory', crafting: '⚒ Crafting', creatures: '🐾 My Creatures', shop: '🛒 Toko Pak Rudi', settings: '⚙ Pengaturan', pause: '☰ Menu Pause', help: '❔ Cara Bermain' };
     $('modal-title').textContent = T[kind] || kind; this.render(arg);
   },
   closeModal() { if (!this.modalKind) return; this.modalKind = null; $('modal').classList.add('hidden'); AudioMgr.sfx('close'); Preview.stop(); this.refreshParty(); },
-  render(arg) { const b = $('modal-body'); b.innerHTML = ''; const k = this.modalKind; if (k === 'inventory') this.renderInventory(b, arg); else if (k === 'crafting') this.renderCrafting(b, arg); else if (k === 'creatures') this.renderCreatures(b); else if (k === 'shop') this.renderShop(b, arg); else if (k === 'settings') this.renderSettings(b); else if (k === 'pause') this.renderPause(b); else if (k === 'help') this.renderHelp(b); else if (k === 'starter') this.renderStarter(b); },
+  render(arg) { const b = $('modal-body'); b.innerHTML = ''; const k = this.modalKind; if (k === 'inventory') this.renderInventory(b, arg); else if (k === 'crafting') this.renderCrafting(b, arg); else if (k === 'creatures') this.renderCreatures(b); else if (k === 'shop') this.renderShop(b, arg); else if (k === 'settings') this.renderSettings(b); else if (k === 'pause') this.renderPause(b); else if (k === 'help') this.renderHelp(b); else if (k === 'starter') this.renderStarter(b); else if (k === 'chest') this.renderChest(b); },
   btn(label, cls, fn, dis) { const b = el('button', 'btn small ' + (cls || ''), label); b.disabled = !!dis; b.onclick = () => { AudioMgr.sfx('click'); fn(); }; return b; },
   renderInventory(b, sel) {
     const ids = Object.keys(Inventory.items).sort((a, c) => (ITEMS[a].cat > ITEMS[c].cat ? 1 : -1));
@@ -4350,6 +4671,19 @@ const UI = {
       R.appendChild(row);
     }
     wrap.append(L, R); b.appendChild(wrap);
+  },
+  renderChest(b) {
+    const C = Game.run.chest || (Game.run.chest = {});
+    b.appendChild(el('p', '', '<b>Semua peti penyimpanan terhubung</b> ke gudang rumahmu. Klik item untuk memindahkan semuanya (tahan Shift = setengah).'));
+    const wrap = el('div', 'split'), L = el('div', 'l', '<h4 style="margin:0 0 8px">🎒 Tas</h4>'), R = el('div', 'r', '<h4 style="margin:0 0 8px">📦 Peti Rumah</h4>');
+    const grid = (items, from) => { const g = el('div', 'grid-items'), ids = Object.keys(items).filter(id => ITEMS[id]); if (!ids.length) g.innerHTML = '<div style="color:#9aa6cf">Kosong</div>';
+      for (const id of ids) { const c = el('div', 'item-cell', `${itemIcon(id, 30)}<div class="nm">${ITEMS[id].name}</div><span class="cnt">${items[id]}</span>`);
+        c.onclick = e => { const n = e.shiftKey ? Math.max(1, Math.floor(items[id] / 2)) : items[id];
+          if (from === 'bag') { Inventory.remove(id, n); C[id] = (C[id] || 0) + n; if (Inventory.armor === id && !Inventory.has(id)) { Inventory.armor = null; Game.world && Game.world.player.refreshArmor(); } }
+          else { C[id] -= n; if (C[id] <= 0) delete C[id]; Inventory.add(id, n, true); }
+          AudioMgr.sfx('click'); b.innerHTML = ''; this.renderChest(b); }; g.appendChild(c); }
+      return g; };
+    L.appendChild(grid(Inventory.items, 'bag')); R.appendChild(grid(C, 'chest')); wrap.append(L, R); b.appendChild(wrap);
   },
   renderStarter(b) {
     b.appendChild(el('p', '', '<b>Era Monster dimulai!</b> Pilih satu makhluk pertama. Setelah ini makhluk liar muncul di seluruh dunia — kamu bisa menangkap, merawat, dan bertarung.'));
@@ -4497,6 +4831,7 @@ const UI = {
       <li><kbd>I</kbd> Tas • <kbd>C</kbd> Crafting • <kbd>P</kbd> My Creatures • <kbd>Esc</kbd> Menu</li></ul>
       <h4>📱 Kontrol Sentuh</h4><p>Joystick kiri untuk jalan, geser layar untuk memutar kamera, ketuk/tahan untuk menambang & menyerang, tombol TARUH untuk mode menaruh block.</p>
       <h4>❤ Sistem Nyawa</h4><p>Nyawa terpisah dari HP. Nyawa hilang saat HP habis, kalah battle (Medium ke atas), atau terkena <b>Soul Strike</b> (Hard ke atas). Nyawa yang hilang <b>tidak pulih</b> kecuali dengan Potion Rahasia. Jika diambil oleh monster/rival, nyawa itu <b>dicuri</b> — mereka bisa bangkit kembali memakai nyawa curian. Di <b>Expert Moon</b>, satu serangan bisa mengambil ½ sampai 7 nyawa; kehilangan 7 sekaligus = <b>OUT DEAD</b>.</p>
+      <h4>🏙 Kota Kubus & Rumah Kita</h4><p>Kota besar bertembok di tengah dunia: alun-alun & air mancur, balai kota, pasar, klinik, bengkel, apartemen, arena, taman, kebun & perpustakaan. Puluhan pemain lain berjalan-jalan bersama makhluknya — ajak ngobrol atau battle persahabatan. <b>Rumah Kita</b> (atap biru, dekat alun-alun) punya kasur (tidur di malam hari & titik bangun), peti penyimpanan, dan meja crafting. Makhluk di Storage bermain di halaman rumahmu.</p>
       <h4>🪲 Rahasia</h4><p>Serangga hitam kecil bersembunyi di atas tanah, jauh dari desa. Dengarkan bunyi <i>tik-tik</i> halus. Hancurkan block tepat di bawah serangga → Chest muncul. Tanya Nenek Sari untuk petunjuk arah.</p>
       <h4>🐾 Menangkap & Merawat</h4><p>Lemahkan makhluk sampai HP &lt; 40%, lalu lempar Pock Ball (di battle atau langsung di open world dengan G). Peluang dipengaruhi HP, status (tidur/beku), jenis bola, dan Happiness pemimpin timmu. Rawat makhluk di My Creatures: beri makan, istirahat, bermain, latih. Happiness tinggi = damage & kritis lebih besar, patuh, dan evolusi lebih mudah.</p>
       <h4>⚒ Crafting</h4><p>Tambang kayu, batu, bara, besi, emas, kristal. Buat papan, tongkat, beliung, Pock Ball, Potion, makanan, armor, hingga Evolution Stone. Resep ⚒ butuh Meja Crafting di dekatmu.</p></div>`;
@@ -4634,12 +4969,12 @@ const Input = {
   up(e) {
     if (this.pid != null && e.pointerId !== this.pid) return; this.pid = null;
     const wasDrag = this.dragging;
-    if (e.button === 2 || (this.rmb && e.pointerType === 'mouse' && e.button === 2)) { this.rmb = false; if (!wasDrag && Game.state === 'world' && !UI.blocking() && !Game.world.busy) { const t = Game.world.pickTarget(this.ndc.x, this.ndc.y); if (t && t.block && t.reach <= 6) Game.world.placeBlock(t.block); } this.dragging = false; return; }
+    if (e.button === 2 || (this.rmb && e.pointerType === 'mouse' && e.button === 2)) { this.rmb = false; if (!wasDrag && Game.state === 'world' && !UI.blocking() && !Game.world.busy) { const t = Game.world.pickTarget(this.ndc.x, this.ndc.y); if (t && t.block && t.reach <= 6 && !Game.world.useBlock(t.block)) Game.world.placeBlock(t.block); } this.dragging = false; return; }
     if (!this.lmb) return;
     this.lmb = false;
     if (!wasDrag && e.target && e.target.closest && e.target.closest('#gl')) {
       if (Game.state === 'room') Room.click(this.ndc);
-      else if (Game.state === 'world' && this.placeMode && !UI.blocking() && !this.consumed) { const t = Game.world.pickTarget(this.ndc.x, this.ndc.y); if (t && t.block && t.reach <= 6) Game.world.placeBlock(t.block); }
+      else if (Game.state === 'world' && this.placeMode && !UI.blocking() && !this.consumed) { const t = Game.world.pickTarget(this.ndc.x, this.ndc.y); if (t && t.block && t.reach <= 6 && !Game.world.useBlock(t.block)) Game.world.placeBlock(t.block); }
     }
     this.dragging = false;
   },
@@ -4872,7 +5207,7 @@ const Game = {
   },
   async continueRun() {
     let s; try { s = JSON.parse(localStorage.getItem('minepock_run')); } catch (e) { } if (!s) return;
-    if (s.v !== 2) { this.deleteSave(); UI.toast('Simpanan versi lama tidak cocok dengan dunia baru — mulai run baru ya.', 'bad', 4); return this.toRoom(); }
+    if (s.v !== 3) { this.deleteSave(); UI.toast('Simpanan versi lama tidak cocok dengan dunia baru — mulai run baru ya.', 'bad', 4); return this.toRoom(); }
     this.diffIndex = s.diffIndex; this.diff = DIFFICULTIES[s.diffIndex]; this.run = s.run; this.stats = s.stats; this.dex = s.dex || {}; this.cool = {};
     this.party = s.party.map(CreatureInstance.from); this.storage = s.storage.map(CreatureInstance.from);
     LifeSystem.init(this.diff, s.life); Inventory.load(s.inv); UI.ballPref = s.ballPref || 'pockball'; if (!this.run.stage) this.run.stage = 3; Quests.init(this.run);
@@ -4892,7 +5227,7 @@ const Game = {
   updateMusic(force) { if (this.state !== 'world' || this.overlay) return; const w = this.world; const n = this.diff.moon ? 'moon' : w.isNight ? (this.diffIndex >= 3 ? 'moon' : 'night') : 'world'; if (force || Music.name !== n) Music.play(n); },
   saveRun(auto) {
     if (this.state !== 'world' && this.state !== 'battle' || !this.world || this.runOver) return;
-    const s = { v: 2, diffIndex: this.diffIndex, run: this.run, stats: this.stats, dex: this.dex, party: this.party.map(c => c.serialize()), storage: this.storage.map(c => c.serialize()), life: LifeSystem.serialize(), inv: Inventory.serialize(), ballPref: UI.ballPref, world: this.world.serialize(), t: Date.now() };
+    const s = { v: 3, diffIndex: this.diffIndex, run: this.run, stats: this.stats, dex: this.dex, party: this.party.map(c => c.serialize()), storage: this.storage.map(c => c.serialize()), life: LifeSystem.serialize(), inv: Inventory.serialize(), ballPref: UI.ballPref, world: this.world.serialize(), t: Date.now() };
     try { localStorage.setItem('minepock_run', JSON.stringify(s)); if (!auto) UI.toast('💾 Run tersimpan.', 'good'); } catch (e) { if (!auto) UI.toast('Gagal menyimpan (penyimpanan browser penuh/diblokir).', 'bad'); }
   },
   /* --- battle --- */
@@ -4908,15 +5243,16 @@ const Game = {
     await UI.fade(true, .35); UI.battleSub(null); UI.showBattle(false);
     this.setScreen('world'); const wm = this.world;
     if (opts.kind === 'wild') { if (res === 'win' || res === 'caught') { if (!opts.wild.dead) opts.wild.remove(); } else { opts.wild.alertT = 4; opts.wild.target = opts.wild.pos.clone().add(new THREE.Vector3(rnd(-8, 8), 0, rnd(-8, 8))); } }
-    if (opts.kind === 'trainer') { if (res === 'win') { opts.trainer.remove(); } else opts.trainer.cool = 45; }
+    if (opts.kind === 'trainer') { if (opts.friendly) opts.trainer.cool = 90; else if (res === 'win') { opts.trainer.remove(); } else opts.trainer.cool = 45; }
     UI.fade(false, .45); this.updateMusic(true); UI.refreshParty(); UI.updateHud();
-    if (res === 'lose') {
+    if (res === 'lose' && opts.friendly) UI.toast('Kalah di battle persahabatan — tidak ada nyawa yang hilang. Sembuhkan makhlukmu di Klinik!', 'info', 4);
+    else if (res === 'lose') {
       const D = this.diff; let amt = D.id === 'expert' ? LifeSystem.roll() : D.battleLoss;
       const thief = opts.kind === 'trainer' ? opts.trainer : (opts.wild && opts.wild.isBoss ? opts.wild : null);
       if (thief) { thief.isAI = true; if (!amt) amt = .5; }
       wm.player.respawn();
       if (amt > 0) { if (LifeSystem.lose(amt, 'Kalah dalam battle', thief)) return; }
-      UI.toast('Kamu kalah dan dibawa kembali ke Desa Kubus. Sembuhkan makhlukmu di Klinik!', 'bad', 5);
+      UI.toast('Kamu kalah dan dibawa kembali ke Kota Kubus. Sembuhkan makhlukmu di Klinik!', 'bad', 5);
     } else if (res === 'caught' || res === 'win') this.saveRun(true);
   },
   /* --- OUT DEAD --- */
@@ -4940,6 +5276,8 @@ const Game = {
     else if (k === 'r') W.player.eatBest();
     else if (k === 'f') {
       if (W.busy) return; const n = W.nearestNPC(3.2); if (n) return W.interact(n);
+      const hbk = W.hover && W.hover.block; if (hbk && W.hover.reach <= 6 && USABLE.has(hbk.id)) return W.useBlock(hbk);
+      const ctz = W.nearestOf(W.citizens, 3.2); if (ctz) return W.interact(ctz);
       const ch = W.nearestOf(W.chests, 3.2); if (ch && !ch.opened) return ch.open();
       const h = W.hover && W.hover.ent; if (h && h.type === 'wild') return W.interact(h);
       const r = W.nearestOf(W.rivals, 6); if (r) return W.interact(r);

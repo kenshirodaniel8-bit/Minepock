@@ -29,7 +29,7 @@ Info teknis:
    8. Buat Obor
 
    Setiap tugas memberi hadiah. Tombol **⏭ Lewati** tersedia kalau ingin langsung ke Tahap 3.
-5. **Temui Pak Bram di desa.** Pilih makhluk pertama. **Tahap 3: Era Monster** dimulai: makhluk liar muncul di seluruh dunia, dan battle, tangkap, rawat, evolusi, serta rival terbuka.
+5. **Temui Pak Bram di Balai Kota.** Pilih makhluk pertama. **Tahap 3: Era Monster** dimulai: makhluk liar muncul di seluruh dunia, dan battle, tangkap, rawat, evolusi, serta rival terbuka.
 6. Bertahanlah! Kalau **nyawa** habis (atau hilang 7 sekaligus di Expert Moon) kamu **OUT DEAD**.
 
 ### Kontrol
@@ -93,9 +93,26 @@ Tipe elemen: Normal, Api, Air, Rumput, Listrik, Tanah, Es, Bayangan, Kosmik. Set
 | Pantai | tepi laut |
 | Gua | bijih: bara, besi, emas, kristal |
 
-Di tengah peta ada **Desa Kubus** dengan 7 NPC bersuara.
+Di tengah peta ada **Kota Kubus** (lihat bagian berikut).
 
-## 6. Nyawa, HP & rasa lapar
+## 6. Kota Kubus & Rumah Kita
+Kota besar bertembok (±75×75 block) di tengah dunia 192×192:
+* **Jalan raya** beraspal dengan trotoar, jalan lingkar, gerbang di 4 sisi, tembok kota, dan menara di sudut.
+* **Alun-alun** dengan air mancur, bangku, dan lentera.
+* **Gedung:** Balai Kota bermenara (Pak Bram), Pasar + Toko Pak Rudi, Klinik Suster Mira, Bengkel, Perpustakaan, Arena Battle, Taman Kota, Kebun Warga, Menara Jaga.
+* **Tempat tinggal:** belasan rumah warga 1–2 lantai, dan apartemen 3–5 lantai yang punya tangga, kasur, rak buku, dan karpet.
+* **24 pemain kota (AI).** Setiap pemain punya nama, penampilan, dan suara sendiri. Mereka berjalan di jalan raya atau nongkrong di alun-alun, pasar, taman, dan arena, ditemani makhluk peliharaan. Mereka juga mengobrol lewat balon chat. Klik atau `F` untuk ngobrol, menyapa, atau **battle persahabatan**: battle tanpa risiko nyawa yang tersedia setelah Tahap 3.
+
+**Rumah Kita** (atap biru dengan papan nama "Rumah [namamu]") adalah tempat kamu muncul:
+* rumah 2 lantai dengan halaman berpagar;
+* **Kasur:** klik kanan atau `F` untuk menyimpan titik bangun. Di malam hari kamu bisa tidur sampai pagi: HP pulih dan monster di sekitar hilang.
+* **Peti Penyimpanan:** gudang barang yang aman. Semua peti yang kamu buat terhubung ke gudang yang sama.
+* **Meja Crafting.**
+* **Halaman tempat makhluk di Storage bermain.**
+
+Resep baru (kategori *Rumah*): kasur, peti penyimpanan, rak buku, bata batu, wol & genteng berwarna.
+
+## 7. Nyawa, HP & rasa lapar
 * **HP** dan **Nyawa** terpisah. Nyawa yang hilang tidak pulih, kecuali dengan **Potion Rahasia**.
 * Monster, rival, dan boss **mencuri nyawa**. Monster yang menyimpan nyawa curian bisa bangkit lagi.
 * Di **Expert Moon**, satu serangan bisa mengambil ½ sampai 7 nyawa. Kehilangan 7 sekaligus = **OUT DEAD**.
@@ -105,7 +122,7 @@ Di tengah peta ada **Desa Kubus** dengan 7 NPC bersuara.
   * Makan dengan **R**: daging panggang +8, apel +4, beri +2, daging mentah +3.
 * **Potion Rahasia + Armor Gogil:** cari serangga hitam kecil (dengarkan bunyi *tik-tik*), hancurkan block di bawahnya, lalu buka chest yang muncul.
 
-## 7. Realisme visual & suara
+## 8. Realisme visual & suara
 * **Bayangan matahari dan bulan** real-time (bisa dimatikan di Pengaturan untuk perangkat lemah).
 * **Kubah langit** bergradasi dengan cahaya matahari, senja, malam berbintang, dan bulan merah.
 * **Air** beriak, bergerak, dan memantulkan kilau.
@@ -113,7 +130,7 @@ Di tengah peta ada **Desa Kubus** dengan 7 NPC bersuara.
 * **Suara alam:** kicau burung, jangkrik, burung hantu, angin di pegunungan, gemericik air.
 * Pencahayaan ambient occlusion pada block, kabut jarak, siklus siang-malam, cahaya lentera & kristal.
 
-## 8. Struktur kode (`index.html`)
+## 9. Struktur kode (`index.html`)
 | Modul | Isi |
 |---|---|
 | CORE & DATA | `TYPES`, `SKILLS`, `SPECIES`, `ANIMALS`, `ITEMS`, `RECIPES`, `QUESTS`, `DIFFICULTIES`, `NPCS`, `SPAWNS` |
@@ -121,13 +138,13 @@ Di tengah peta ada **Desa Kubus** dengan 7 NPC bersuara.
 | `Sculpt` + `sculptPart` | mesin micro-voxel; `buildHumanoid`, `buildCreature`, `buildAnimal` |
 | `Creature3D` | animasi makhluk & hewan |
 | `LifeSystem`, `Inventory`, `CraftingSystem`, `Quests` | nyawa, tas, crafting, tugas |
-| `VoxelWorld`, `generateWorld` | dunia: chunk mesher dengan ambient occlusion, raycast, fisika, biome, desa |
-| `WorldManager` (`WorldMode`) + entity | `Player` (lapar), `AnimalEnt`, `WildEnt`, `HostileEnt`, `RivalEnt`, `NPCEnt`, `BugEnt`, `ChestEnt` |
+| `VoxelWorld`, `generateWorld`, `buildCity` | dunia: chunk mesher dengan ambient occlusion, raycast, fisika, biome, Kota Kubus |
+| `WorldManager` (`WorldMode`) + entity | `Player` (lapar), `CityPlayerEnt` (pemain kota), `AnimalEnt`, `WildEnt`, `HostileEnt`, `RivalEnt`, `NPCEnt`, `BugEnt`, `ChestEnt` |
 | `BattleSystem`, `Evolution` | battle & evolusi |
 | `UIManager`, `Creator` (Tahap 1) | antarmuka & pembuat karakter |
 | `SceneManager` (`Title`, `Room`, `Game`) | adegan, loop utama, simpan/muat |
 
-## 9. Saran pengembangan
+## 10. Saran pengembangan
 * Cahaya obor dinamis.
 * Dunia tak terbatas.
 * Multiplayer, supaya pencurian nyawa terjadi antar pemain.
