@@ -16,11 +16,10 @@ Info teknis:
 ## 1. Alur bermain
 
 1. **Title → PLAY.**
-2. **Tahap 1: Pilih / Buat Karakter.** Pilih salah satu dari **5 karakter**: Penyihir Labu, Si Hijau, Penyihir Senja, Penyihir Emas, atau **Penyihir Perak**. Penyihir Perak adalah versi baru dari Penyihir Emas dengan warna perak-biru, syal, dan sabuk, karena skin ke-4 dan ke-5 yang dikirim hampir kembar.
+2. **Tahap 1: Pilih Karakter.** Pilih salah satu dari **5 karakter**: Penyihir Labu, Si Hijau, Penyihir Senja, Penyihir Emas, atau **Penyihir Perak**. Penyihir Perak adalah versi baru dari Penyihir Emas dengan warna perak-biru, syal, dan sabuk, karena skin ke-4 dan ke-5 yang dikirim hampir kembar.
    * Setiap karakter punya **6 versi**: Asli, Malam, Hutan, Mawar, Es, Bayangan. Versi mengubah warna baju/topi dan menambah aksesori (syal atau sabuk), sementara warna kulit tetap.
-   * Atau pilih **Buat Sendiri**: atur warna kulit, 8 gaya rambut, warna rambut & mata, model baju, celana, sepatu, topi, kacamata, dan ransel.
-   * Model skin dibuat dari kubus kecil: setiap piksel skin menjadi satu kubus, dan lapisan luar (topi, jaket, lengan, celana) timbul 3D.
-   * **NPC desa dan 24 pemain kota** juga memakai salah satu dari 5 karakter itu, masing-masing dengan versi berbeda supaya tidak kembar.
+   * Karakter tampil persis seperti skin aslinya: kotak bertekstur (kepala 8×8×8, badan 8×12×4, lengan, kaki) plus lapisan luar tipis untuk topi, jaket, lengan, dan celana.
+   * **Semua NPC, 24 pemain kota, dan rival** juga memakai salah satu dari 5 karakter itu, masing-masing dengan versi berbeda supaya tidak kembar.
 3. **Main Room.** Pilih 1 dari 5 portal: Normal, Medium, Hard, Hardmon, Expert Moon.
 4. **Tahap 2: Survival Blok.** Ikuti panel tugas di kiri:
    1. Tebang pohon (4 kayu)
@@ -50,7 +49,7 @@ Info teknis:
 ---
 
 ## 2. Model "kotak-kotak kecil" (micro-voxel)
-Semua model tidak lagi memakai satu kotak besar. Setiap bagian tubuh dipahat dari ribuan kubus kecil (±3–5 cm per kubus) memakai bentuk dasar:
+Model makhluk dan hewan (bukan karakter/NPC) dipahat dari ribuan kubus kecil (±3–5 cm per kubus) memakai bentuk dasar:
 * elips / superelips untuk badan dan kepala,
 * kapsul meruncing untuk kaki, ekor, tanduk, dan paruh,
 * torus untuk cincin dan kerah.

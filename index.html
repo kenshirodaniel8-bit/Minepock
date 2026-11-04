@@ -252,9 +252,9 @@ button{font-family:var(--ui);cursor:pointer}
 .cr-panel h2{margin:0;font-family:var(--pix);font-size:14px;color:var(--gold)}
 .cr-sub{margin:6px 0 8px;font-size:12px;color:var(--muted);font-weight:800}
 #cr-opts{flex:1;overflow:auto;padding-right:4px}
-.cr-skins{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cr-skins{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
 .cr-skin{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px 6px;background:#1b2240;border:3px solid #0a0d1c;border-radius:7px;color:#dfe5ff;cursor:pointer;font-family:var(--ui)}
-.cr-skin img{width:64px;height:84px;image-rendering:auto}
+.cr-skin img{width:100%;max-width:64px;height:auto;aspect-ratio:3/4;image-rendering:auto}
 .cr-skin b{font-size:10.5px;line-height:1.1;text-align:center}
 .cr-skin:hover{border-color:#5d6ea3}
 .cr-skin.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,207,63,.35);background:#2a2f55}
@@ -328,8 +328,8 @@ button{font-family:var(--ui);cursor:pointer}
   .portal-tabs .btn{min-width:0}
   #room-ui .room-top p{font-size:11px}
   .cr-panel{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:56vh}
-  .cr-skins{grid-template-columns:repeat(6,1fr)}
-  .cr-skin img{width:44px;height:58px}
+  .cr-skins{grid-template-columns:repeat(5,1fr)}
+  .cr-skin img{max-width:48px}
   .cr-skin b{font-size:8.5px}
   #quest{top:172px;left:8px;transform:none;width:calc(100vw - 150px);padding:6px 8px}
   #quest .qt{font-size:11px}
@@ -374,7 +374,7 @@ button{font-family:var(--ui);cursor:pointer}
   <div id="creator" class="hidden">
     <div class="cr-panel panel">
       <h2>TAHAP 1 • BUAT KARAKTER</h2>
-      <p class="cr-sub">Pilih salah satu dari 5 karakter (bisa ganti versi), atau buat sendiri. Geser model untuk memutar.</p>
+      <p class="cr-sub">Pilih salah satu dari 5 karakter, lalu pilih versinya. Geser model untuk memutar.</p>
       <div id="cr-opts"></div>
       <div class="cr-actions"><button class="btn purple" id="cr-random">🎲 Acak</button><button class="btn green" id="cr-done">✓ Selesai — lanjut</button></div>
     </div>
@@ -1878,53 +1878,59 @@ const Skins = {
     return this.cache[key] = out;
   },
 };
-/* membangun model humanoid dari skin — struktur sendi sama dengan buildHumanoid */
+/* membangun model humanoid dari skin — kotak bertekstur persis seperti skin aslinya
+   (kepala 8x8x8, badan 8x12x4, lengan 4/3x12x4, kaki 4x12x4 piksel) + lapisan luar tipis.
+   Struktur sendi sama dengan buildHumanoid sehingga semua animasi tetap jalan. */
+const SKIN_TEX = {}, SKIN_GEO = {};
+function skinMaterials(id, vid) {
+  const key = id + '|' + (vid || 'asli'); if (SKIN_TEX[key]) return SKIN_TEX[key];
+  const px = Skins.pixels(id, vid), c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'); if (px) { const im = g.createImageData(64, 64); im.data.set(px); g.putImageData(im, 0, 0); }
+  const t = new THREE.CanvasTexture(c); t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestFilter; t.generateMipmaps = false;
+  return SKIN_TEX[key] = { t, base: new THREE.MeshLambertMaterial({ map: t }), over: new THREE.MeshLambertMaterial({ map: t, alphaTest: .5, side: THREE.DoubleSide }) };
+}
+/* kotak dengan UV format skin standar: [kiri, kanan, atas, bawah, depan, belakang] */
+function skinBoxGeo(w, h, d, u, v, inf) {
+  const key = [w, h, d, u, v, inf].join(','); if (SKIN_GEO[key]) return SKIN_GEO[key];
+  const vs = .0625, g = new THREE.BoxGeometry((w + inf * 2) * vs, (h + inf * 2) * vs, (d + inf * 2) * vs);
+  const R = [[u + d + w, v + d, d, h], [u, v + d, d, h], [u + d, v, w, d], [u + d + w, v, w, d], [u + d, v + d, w, h], [u + 2 * d + w, v + d, w, h]];
+  const uv = g.attributes.uv, e = .02;
+  for (let f = 0; f < 6; f++) { const [rx, ry, rw, rh] = R[f]; for (let k = 0; k < 4; k++) { const i = f * 4 + k, U = uv.getX(i), V = uv.getY(i); uv.setXY(i, (rx + (U ? rw - e : e)) / 64, 1 - (ry + (V ? e : rh - e)) / 64); } }
+  return SKIN_GEO[key] = g;
+}
 function buildSkinHumanoid(o) {
-  const vs = .0625, id = o.skinId, vid = o.skinVar || 'asli', px = Skins.pixels(id, vid), slim = !!Skins.slim[id], aw = slim ? 3 : 4;
-  const ctx = newSculptCtx('SK|' + id + '|' + vid, vs), root = new THREE.Group(), g = new THREE.Group(); root.add(g);
-  const P = { rSide: -1, bodyY: 12 * vs }, hexCache = {};
-  const at = (x, y) => { const k = y * 64 + x; if (k in hexCache) return hexCache[k]; if (!px) return '#888888'; const i = k * 4; return hexCache[k] = px[i + 3] < 100 ? null : '#' + ((1 << 24) + (px[i] << 16) + (px[i + 1] << 8) + px[i + 2]).toString(16).slice(1); };
-  /* satu bagian tubuh: kotak w*h*d piksel; uv = lapisan dasar, ov = lapisan luar (timbul) */
-  const part = (parent, x, y, z, w, h, d, ax, ay, az, uv, ov) => {
+  const vs = .0625, id = o.skinId, vid = o.skinVar || 'asli', slim = !!Skins.slim[id], aw = slim ? 3 : 4, M = skinMaterials(id, vid);
+  const root = new THREE.Group(), g = new THREE.Group(); root.add(g);
+  const P = { rSide: -1, bodyY: 12 * vs };
+  const part = (parent, x, y, z, w, h, d, ax, ay, az, uv, ov, inf) => {
     const grp = new THREE.Group(); grp.position.set(x, y, z); parent.add(grp);
-    const key = ctx.key + '|' + (ctx.n++); let geo = SCULPT_CACHE[key];
-    if (!geo) {
-      const s = new Sculpt(vs); s.noJitter = true;
-      const face = (u, v) => ({
-        front: (i, j) => at(u + d + i, v + d + (h - 1 - j)), back: (i, j) => at(u + 2 * d + w + (w - 1 - i), v + d + (h - 1 - j)),
-        right: (k, j) => at(u + k, v + d + (h - 1 - j)), left: (k, j) => at(u + d + w + (d - 1 - k), v + d + (h - 1 - j)),
-        top: (i, k) => at(u + d + i, v + k), bottom: (i, k) => at(u + d + w + i, v + k),
-      });
-      const T = face(uv[0], uv[1]);
-      for (let i = 0; i < w; i++) for (let j = 0; j < h; j++) for (let k = 0; k < d; k++) s.put(i, j, k, [T.left(k, j), T.right(k, j), T.top(i, k), T.bottom(i, k), T.front(i, j), T.back(i, j)].map(c => c || '#1c1c22'));
-      if (ov) {
-        const O = face(ov[0], ov[1]); let c;
-        for (let i = 0; i < w; i++) for (let j = 0; j < h; j++) { if ((c = O.front(i, j))) s.put(i, j, d, c); if ((c = O.back(i, j))) s.put(i, j, -1, c); }
-        for (let k = 0; k < d; k++) for (let j = 0; j < h; j++) { if ((c = O.right(k, j))) s.put(-1, j, k, c); if ((c = O.left(k, j))) s.put(w, j, k, c); }
-        for (let i = 0; i < w; i++) for (let k = 0; k < d; k++) { if ((c = O.top(i, k))) s.put(i, h, k, c); if ((c = O.bottom(i, k))) s.put(i, -1, k, c); }
-      }
-      geo = SCULPT_CACHE[key] = s.geometry();
-    }
-    const m = new THREE.Mesh(geo, ctx.mat); m.castShadow = true; m.position.set(ax * vs, ay * vs, az * vs); grp.add(m);
+    const cx = (ax + w / 2) * vs, cy = (ay + h / 2) * vs, cz = (az + d / 2) * vs;
+    const m = new THREE.Mesh(skinBoxGeo(w, h, d, uv[0], uv[1], 0), M.base); m.position.set(cx, cy, cz); m.castShadow = true; grp.add(m);
+    const l = new THREE.Mesh(skinBoxGeo(w, h, d, ov[0], ov[1], inf), M.over); l.position.set(cx, cy, cz); grp.add(l);
     return grp;
   };
   // kaki & lengan kanan karakter berada di sisi -x (karakter menghadap +z)
-  P.legR = part(g, -2 * vs, 12 * vs, 0, 4, 12, 4, -2, -12, -2, [0, 16], [0, 32]);
-  P.legL = part(g, 2 * vs, 12 * vs, 0, 4, 12, 4, -2, -12, -2, [16, 48], [0, 48]);
+  P.legR = part(g, -2 * vs, 12 * vs, 0, 4, 12, 4, -2, -12, -2, [0, 16], [0, 32], .25);
+  P.legL = part(g, 2 * vs, 12 * vs, 0, 4, 12, 4, -2, -12, -2, [16, 48], [0, 48], .25);
   P.body = new THREE.Group(); P.body.position.y = 12 * vs; g.add(P.body);
-  part(P.body, 0, 0, 0, 8, 12, 4, -4, 0, -2, [16, 16], [16, 32]);
-  P.armR = part(P.body, -(4 + aw / 2) * vs, 10 * vs, 0, aw, 12, 4, -aw / 2, -10, -2, [40, 16], [40, 32]);
-  P.armL = part(P.body, (4 + aw / 2) * vs, 10 * vs, 0, aw, 12, 4, -aw / 2, -10, -2, [32, 48], [48, 48]);
+  part(P.body, 0, 0, 0, 8, 12, 4, -4, 0, -2, [16, 16], [16, 32], .25);
+  P.armR = part(P.body, -(4 + aw / 2) * vs, 10 * vs, 0, aw, 12, 4, -aw / 2, -10, -2, [40, 16], [40, 32], .25);
+  P.armL = part(P.body, (4 + aw / 2) * vs, 10 * vs, 0, aw, 12, 4, -aw / 2, -10, -2, [32, 48], [48, 48], .25);
   P.head = new THREE.Group(); P.head.position.y = 12 * vs; P.body.add(P.head);
-  part(P.head, 0, 0, 0, 8, 8, 8, -4, 0, -4, [0, 0], [32, 0]);
+  part(P.head, 0, 0, 0, 8, 8, 8, -4, 0, -4, [0, 0], [32, 0], .5);
   if (o.tool) { P.tool = new THREE.Group(); P.tool.position.set(0, -.6, .05); P.armR.add(P.tool); }
+  if (o.cane) { const c = addBox(P.armR, .06, .95, .06, lambert('#6b4a2a'), 0, -.95, .12); c.rotation.x = .15; }
+  if (o.spear) { addBox(P.armR, .05, 1.9, .05, lambert('#6b4a2a'), 0, -.4, .12); addBox(P.armR, .12, .24, .04, lambert('#d8d8e0'), 0, .6, .12); }
   if (o.hunch) { P.body.rotation.x = .2; P.head.rotation.x = -.15; }
   const hgt = o.h || .9; g.scale.setScalar(hgt);
   return { group: root, P, height: 33 * vs * hgt };
 }
 
 function buildHumanoid(o0) {
-  if (o0.skinId && Skins.raw[(Skins.def(o0.skinId).base || o0.skinId)]) return buildSkinHumanoid(o0);
+  if (Object.keys(Skins.raw).length) {
+    let o = o0; if (!o.skinId || !Skins.raw[Skins.def(o.skinId).base || o.skinId]) { let hs = 7; const str = JSON.stringify(o0); for (let i = 0; i < str.length; i++) hs = (hs * 31 + str.charCodeAt(i)) | 0; hs = Math.abs(hs); o = Object.assign({}, o0, { skinId: SKIN_DEFS[hs % SKIN_DEFS.length].id, skinVar: SKIN_VARIANTS[(hs >> 4) % SKIN_VARIANTS.length].id }); }
+    return buildSkinHumanoid(o);
+  }
   const o = normLook(o0), vs = .034, ctx = newSculptCtx('H|' + JSON.stringify(o), vs);
   const part = (par, x, y, z, fill, opt) => sculptPart(ctx, par, x, y, z, fill, opt);
   const root = new THREE.Group(), g = new THREE.Group(); root.add(g);
@@ -2040,15 +2046,12 @@ function buildHumanoid(o0) {
   g.scale.setScalar(o.h || 1);
   return { group: root, P, height: (legH + bodyH + hs + .06) * (o.h || 1) };
 }
-/* armor (dipakai pemain) dari micro-voxel */
+/* armor (dipakai pemain): pelat dada + bantalan bahu */
 function buildArmorPart(parent, col, gogil) {
-  const ctx = newSculptCtx('ARM|' + col + (gogil ? 'G' : ''), .034);
-  sculptPart(ctx, parent, 0, 0, 0, s => {
-    s.sup(0, .42, 0, .285, .23, .165, (x, y, z) => (Math.abs(x) < .02 && z > .1) ? shade(col, .75) : (y < .22 ? shade(col, .82) : col), 4);
-    for (const sx of [-1, 1]) s.sup(sx * .31, .63, 0, .1, .055, .14, shade(col, 1.1), 2.6);
-    if (gogil) { s.ell(0, .5, .17, .05, .05, .02, '#b04aff'); for (const sx of [-1, 1]) s.cap(sx * .05, .62, .17, sx * .2, .3, .17, .014, .014, '#fff2a0'); }
-  });
-  if (gogil) sculptPart(ctx, parent, 0, 0, 0, s => s.ell(0, .5, .18, .035, .035, .02, '#e8a0ff'), { glow: true });
+  const m = lambert(col, gogil ? .25 : 0), dk = lambert(shade(col, .78));
+  addBox(parent, .56, .48, .32, m, 0, .5, 0); addBox(parent, .57, .06, .33, dk, 0, .3, 0);
+  for (const sx of [-1, 1]) addBox(parent, .22, .13, .3, m, sx * .35, .7, 0);
+  if (gogil) { addBox(parent, .12, .12, .02, lambert('#b04aff', 1), 0, .54, .17); for (const sx of [-1, 1]) addBox(parent, .03, .3, .02, lambert('#fff2a0', .6), sx * .1, .48, .17); }
 }
 
 /* Bola tangkap blocky (Pock Ball) */
@@ -3642,7 +3645,7 @@ const Creator = {
     addEventListener('pointerup', () => this.drag = null);
     $('cr-random').onclick = () => this.random(); $('cr-done').onclick = () => this.done();
   },
-  open(next) { this.look = Object.assign({}, DEFAULT_LOOK, Game.look || {}); this.next = next || 'room'; Game.setScreen('creator'); this.renderUI(); this.rebuild(); Music.play('room'); Game.resize(); },
+  open(next) { this.look = Object.assign({}, DEFAULT_LOOK, Game.look || {}); if (!this.look.skinId) { this.look.skinId = 'labu'; this.look.skinVar = 'asli'; } this.next = next || 'room'; Game.setScreen('creator'); this.renderUI(); this.rebuild(); Music.play('room'); Game.resize(); },
   rebuild() {
     if (this.model) this.scene.remove(this.model.group);
     this.model = buildHumanoid(Object.assign({}, this.look, { h: .9 })); this.scene.add(this.model.group); this.waveT = 1.2;
@@ -3651,7 +3654,7 @@ const Creator = {
   set(k, v) { this.look[k] = v; AudioMgr.sfx('click'); this.rebuild(); this.renderUI(); },
   random() { const L = this.look, P = LOOK_OPTS; if (L.skinId) { L.skinId = pick(SKIN_DEFS).id; L.skinVar = pick(SKIN_VARIANTS).id; AudioMgr.sfx('shine'); this.rebuild(); this.renderUI(); return; } Object.assign(L, { skin: pick(P.skin), hair: pick(P.hair), hairStyle: pick(Object.keys(HAIR_STYLES)), eyes: pick(P.eyes), shirt: pick(P.cloth), shirtStyle: pick(Object.keys(SHIRT_STYLES)), pants: pick(P.pants), shoes: pick(P.shoes), hat: pick(Object.keys(HAT_STYLES)), hatCol: pick(P.cloth), glasses: pick(['none', 'none', 'round', 'shades']), backpack: chance(.6) ? pick(P.cloth) : null }); AudioMgr.sfx('shine'); this.rebuild(); this.renderUI(); },
   done() {
-    const nm = ($('cr-name') && $('cr-name').value.trim()) || 'Champion'; this.look.name = nm.slice(0, 14); if (!('skinId' in this.look)) this.look.skinId = null;
+    const nm = ($('cr-name') && $('cr-name').value.trim()) || 'Champion'; this.look.name = nm.slice(0, 14); if (!this.look.skinId) this.look.skinId = 'labu';
     Game.look = Object.assign({}, this.look); try { localStorage.setItem('minepock_look', JSON.stringify(Game.look)); } catch (e) { }
     AudioMgr.sfx('levelUp'); UI.toast(`Karakter ${Game.look.name} siap! Tahap 1 selesai.`, 'good', 3); Room.rebuildAvatar(); Game.toRoom();
   },
@@ -3663,7 +3666,6 @@ const Creator = {
     // ===== pilih karakter (5 skin) atau buat sendiri =====
     { const r = el('div', 'cr-row', '<label>Pilih Karakter</label>'), gr = el('div', 'cr-skins');
       SKIN_DEFS.forEach(D => { const on = L.skinId === D.id, c = el('button', 'cr-skin' + (on ? ' on' : ''), `<img src="${Portraits.body({ skinId: D.id, skinVar: on ? L.skinVar : 'asli' }, 'sk_' + D.id + (on ? L.skinVar : ''))}" alt=""><b>${D.name}</b>`); c.title = D.desc; c.onclick = () => { this.look.skinId = D.id; if (!on) this.look.skinVar = 'asli'; AudioMgr.sfx('click'); this.rebuild(); this.renderUI(); }; gr.appendChild(c); });
-      const cu = el('button', 'cr-skin' + (!L.skinId ? ' on' : ''), `<img src="${Portraits.body(Object.assign({}, L, { skinId: null }), 'custom_' + JSON.stringify(Object.assign({}, L, { name: '' })))}" alt=""><b>Buat Sendiri</b>`); cu.onclick = () => { this.look.skinId = null; AudioMgr.sfx('click'); this.rebuild(); this.renderUI(); }; gr.appendChild(cu);
       r.appendChild(gr); box.appendChild(r); }
     if (L.skinId) {
       const D = Skins.def(L.skinId);
@@ -3716,7 +3718,7 @@ const CITY_CHAT = ['Ada yang mau tukar Pock Ball?', 'Baru dapat Voltbit shiny!! 
 const CITY_TITLES = ['Penjelajah', 'Petambang', 'Pembangun', 'Trainer', 'Pedagang', 'Pemburu', 'Kolektor', 'Champion Muda'];
 function cityLook(i) {
   const r = mulberry32(900 + i * 17), p = a => a[Math.floor(r() * a.length)];
-  if (i % 6 !== 5) return { skinId: SKIN_DEFS[i % SKIN_DEFS.length].id, skinVar: SKIN_VARIANTS[(i * 2 + Math.floor(i / 5)) % SKIN_VARIANTS.length].id, h: .84 + r() * .1 };
+  if (true) return { skinId: SKIN_DEFS[i % SKIN_DEFS.length].id, skinVar: SKIN_VARIANTS[(i * 2 + Math.floor(i / 5)) % SKIN_VARIANTS.length].id, h: .84 + r() * .1 };
   return { skin: p(LOOK_OPTS.skin), hair: p(LOOK_OPTS.hair), hairStyle: p(Object.keys(HAIR_STYLES)), eyes: p(LOOK_OPTS.eyes), shirt: p(LOOK_OPTS.cloth), shirtStyle: p(['tee', 'hoodie', 'jacket', 'tee', 'dress', 'hoodie']), pants: p(LOOK_OPTS.pants), shoes: p(LOOK_OPTS.shoes), hat: p(['none', 'none', 'cap', 'beanie', 'wide', 'none']), hatCol: p(LOOK_OPTS.cloth), capBrim: p(LOOK_OPTS.cloth), glasses: p(['none', 'none', 'none', 'round', 'shades']), backpack: r() < .45 ? p(LOOK_OPTS.cloth) : null, lite: true, h: .86 + r() * .1 };
 }
 function segDist(p, s) { const [ax, az, bx, bz] = s, dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz; const t = clamp(((p.x - ax) * dx + (p.z - az) * dz) / L2, 0, 1); return { d: Math.hypot(ax + dx * t - p.x, az + dz * t - p.z), t }; }
@@ -5282,7 +5284,7 @@ const Game = {
     prog(.1, 'Menyiapkan renderer...'); await nextFrame();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     this.renderer.shadowMap.enabled = !!Settings.shadows; this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    try { const L = JSON.parse(localStorage.getItem('minepock_look') || 'null'); if (L) { if (!('skinId' in L)) L.skinId = null; this.look = L; } } catch (e) { }
+    try { const L = JSON.parse(localStorage.getItem('minepock_look') || 'null'); if (L) { if (!L.skinId) { L.skinId = 'labu'; L.skinVar = 'asli'; } this.look = L; } } catch (e) { }
     this.renderer.setPixelRatio(Settings.pixelRatio); this.renderer.setSize(innerWidth, innerHeight); $('gl').appendChild(this.renderer.domElement);
     prog(.25, 'Melukis tekstur blok...'); await nextFrame(); Atlas.build(); resolveBlockTiles();
     prog(.4, 'Menyiapkan sistem...'); await nextFrame(); Portraits.init(); Battle.init(); UI.init(); Input.init(); RoomUI.init();
