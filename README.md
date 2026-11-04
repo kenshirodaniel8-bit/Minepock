@@ -16,7 +16,11 @@ Info teknis:
 ## 1. Alur bermain
 
 1. **Title → PLAY.**
-2. **Tahap 1: Buat Karakter.** Atur nama, warna kulit, 8 gaya rambut, warna rambut & mata, model baju (kaos/hoodie/jaket/jubah/gaun), celana, sepatu, topi, kacamata, dan ransel. Geser model untuk memutarnya. Tombol 🎲 mengacak penampilan.
+2. **Tahap 1: Pilih / Buat Karakter.** Pilih salah satu dari **5 karakter**: Penyihir Labu, Si Hijau, Penyihir Senja, Penyihir Emas, atau **Penyihir Perak**. Penyihir Perak adalah versi baru dari Penyihir Emas dengan warna perak-biru, syal, dan sabuk, karena skin ke-4 dan ke-5 yang dikirim hampir kembar.
+   * Setiap karakter punya **6 versi**: Asli, Malam, Hutan, Mawar, Es, Bayangan. Versi mengubah warna baju/topi dan menambah aksesori (syal atau sabuk), sementara warna kulit tetap.
+   * Atau pilih **Buat Sendiri**: atur warna kulit, 8 gaya rambut, warna rambut & mata, model baju, celana, sepatu, topi, kacamata, dan ransel.
+   * Model skin dibuat dari kubus kecil: setiap piksel skin menjadi satu kubus, dan lapisan luar (topi, jaket, lengan, celana) timbul 3D.
+   * **NPC desa dan 24 pemain kota** juga memakai salah satu dari 5 karakter itu, masing-masing dengan versi berbeda supaya tidak kembar.
 3. **Main Room.** Pilih 1 dari 5 portal: Normal, Medium, Hard, Hardmon, Expert Moon.
 4. **Tahap 2: Survival Blok.** Ikuti panel tugas di kiri:
    1. Tebang pohon (4 kayu)
